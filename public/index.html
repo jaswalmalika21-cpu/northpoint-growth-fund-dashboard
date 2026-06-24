@@ -29,7 +29,7 @@
     background: var(--bg);
     color: var(--text);
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 14px;
+    font-size: 16px;
   }
   .top-accent-bar {
     height: 3px;
@@ -42,112 +42,204 @@
     margin: 0 auto;
     padding: 16px 18px 50px;
   }
+  .topbar {
+    background: linear-gradient(135deg, rgba(212,175,106,0.16), rgba(110,168,254,0.07) 55%, rgba(14,23,38,0.5));
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 18px;
+    box-shadow: inset 0 0 0 1px rgba(212,175,106,0.06);
+    overflow: hidden;
+  }
   header.top {
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
-    gap: 14px;
-    margin-bottom: 10px;
-    padding-bottom: 12px;
+    gap: 18px;
+    padding: 26px 30px 20px;
     border-bottom: 1px solid var(--border);
   }
-  .brand { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .brand { display: flex; flex-direction: column; gap: 6px; }
   .brand h1 {
     margin: 0;
-    font-size: 1.25rem;
+    font-size: 2.6rem;
     font-weight: 800;
     letter-spacing: 0.2px;
+    line-height: 1.1;
   }
-  .brand h1 .mark { color: var(--accent); margin-right: 6px; }
+  .brand h1 .mark { color: var(--accent); margin-right: 10px; }
   .brand .sub {
     color: var(--text-dim);
-    font-size: 0.78rem;
+    font-size: 0.98rem;
+    letter-spacing: 0.01em;
   }
   .status-block {
     text-align: right;
-    font-size: 0.74rem;
+    font-size: 0.84rem;
     color: var(--text-dim);
     font-family: var(--mono);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 7px;
   }
   #data-status.status-error { color: var(--red); }
-  .live-dot {
-    display: inline-block;
-    width: 6px; height: 6px;
-    border-radius: 50%;
+  .market-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.82rem;
+    border: 1px solid var(--border);
+    font-family: 'Inter', sans-serif;
+  }
+  .market-pill.open { color: var(--green); border-color: rgba(61,220,151,0.45); background: rgba(61,220,151,0.12); }
+  .market-pill.closed { color: var(--red); border-color: rgba(255,107,107,0.45); background: rgba(255,107,107,0.12); }
+  .market-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; }
+  .market-pill.open .market-dot {
     background: var(--green);
-    margin-right: 5px;
     box-shadow: 0 0 0 0 rgba(61,220,151,0.6);
     animation: pulse 1.8s infinite;
   }
+  .market-pill.closed .market-dot { background: var(--red); }
+  .market-caveat { font-size: 0.68rem; color: var(--text-dim); font-family: 'Inter', sans-serif; max-width: 220px; line-height: 1.4; }
   @keyframes pulse {
     0% { box-shadow: 0 0 0 0 rgba(61,220,151,0.5); }
     70% { box-shadow: 0 0 0 5px rgba(61,220,151,0); }
     100% { box-shadow: 0 0 0 0 rgba(61,220,151,0); }
   }
   .refresh-btn {
-    margin-top: 6px;
+    margin-top: 4px;
     background: var(--accent);
     color: #1a1305;
     border: none;
     border-radius: 4px;
-    padding: 6px 12px;
+    padding: 7px 14px;
     font-weight: 700;
-    font-size: 0.78rem;
+    font-size: 0.84rem;
     cursor: pointer;
     transition: opacity .15s ease;
   }
   .refresh-btn:hover { opacity: 0.85; }
   .refresh-btn:disabled { opacity: 0.5; cursor: default; }
 
+  .ticker-strip-label {
+    font-size: 0.74rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    margin-bottom: 7px;
+  }
   .ticker-strip {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
-    gap: 0;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    margin-bottom: 14px;
+    gap: 14px;
+    background: transparent;
+    padding: 2px 2px 10px;
+    margin-bottom: 8px;
   }
   .ticker-chip {
-    padding: 8px 14px;
-    border-right: 1px solid var(--border);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
     white-space: nowrap;
-    min-width: 132px;
+    min-width: 270px;
     flex: 0 0 auto;
+    cursor: pointer;
+    transition: border-color .15s ease, box-shadow .15s ease;
   }
-  .tchip-label { font-family: var(--mono); font-size: 0.72rem; color: var(--accent-2); font-weight: 600; margin-bottom: 3px; }
-  .tchip-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-  .tchip-price { font-family: var(--mono); font-size: 0.92rem; font-weight: 700; color: var(--text); }
-  .tchip-chg { font-family: var(--mono); font-size: 0.72rem; margin-top: 3px; }
+  .ticker-chip:hover { border-color: var(--accent-2); box-shadow: 0 0 0 1px rgba(110,168,254,0.2); }
+  .tchip-top-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+  .tchip-badge { display: flex; align-items: center; gap: 8px; border-radius: 20px; padding: 4px 12px 4px 4px; }
+  .tchip-avatar { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.74rem; font-weight: 800; color: #08101e; flex-shrink: 0; }
+  .tchip-co-name { font-size: 0.78rem; color: var(--text); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 96px; }
+  .tchip-top-right { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; }
+  .tchip-label { font-family: var(--mono); font-size: 0.82rem; color: var(--accent-2); font-weight: 700; letter-spacing: 0.02em; }
+  .tchip-chg-pill { font-family: var(--mono); font-size: 0.74rem; font-weight: 700; padding: 2px 8px; border-radius: 9px; white-space: nowrap; }
+  .tchip-chg-pill.up { background: rgba(61,220,151,0.16); color: var(--green); }
+  .tchip-chg-pill.down { background: rgba(255,107,107,0.16); color: var(--red); }
+  .tchip-value-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .tchip-mini-label { font-size: 0.64rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .tchip-price { font-family: var(--mono); font-size: 1.2rem; font-weight: 800; color: var(--text); }
   .spark { display: block; }
-  .spark-na { font-size: 0.62rem; color: var(--text-dim); font-family: var(--mono); }
+  .spark-na { font-size: 0.68rem; color: var(--text-dim); font-family: var(--mono); }
   .text-green { color: var(--green); }
   .text-red { color: var(--red); }
 
+  /* Day's-range mini bar on each ticker chip. Sits alongside a real 1-month
+     sparkline (see .spark / sparklineSvg()) now sourced from Twelve Data —
+     this bar is still useful on its own since it's intraday and built
+     entirely from the live quote endpoint, no extra API calls. */
+  .day-range-mini { width: 64px; }
+  .day-range-mini .bar { position: relative; height: 5px; border-radius: 3px; background: rgba(255,255,255,0.08); margin-bottom: 4px; }
+  .day-range-mini .fill { position: absolute; top: 0; left: 0; height: 100%; border-radius: 3px; background: var(--accent); }
+  .day-range-mini .marker { position: absolute; top: -2.5px; width: 9px; height: 9px; border-radius: 50%; background: var(--text); border: 2px solid var(--bg); transform: translateX(-50%); }
+  .day-range-mini .lbls { display: flex; justify-content: space-between; font-size: 0.6rem; color: var(--text-dim); font-family: var(--mono); }
+
+  /* 52-week range bar — same idea, larger, used in the detail modal and
+     Spotlight, built from metrics.js's week52High/week52Low (an endpoint
+     Finnhub does NOT restrict on the free tier) rather than candle history. */
+  .range-bar-wrap { margin: 4px 0 18px; }
+  .range-bar-wrap .bar { position: relative; height: 8px; border-radius: 4px; background: rgba(255,255,255,0.08); margin: 6px 0; }
+  .range-bar-wrap .fill { position: absolute; top: 0; left: 0; height: 100%; border-radius: 4px; background: linear-gradient(90deg, rgba(212,175,106,0.5), var(--accent)); }
+  .range-bar-wrap .marker { position: absolute; top: -4px; width: 14px; height: 14px; border-radius: 50%; background: var(--text); border: 3px solid var(--bg); transform: translateX(-50%); box-shadow: 0 0 0 1px var(--border); }
+  .range-bar-wrap .lbls { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--text-dim); font-family: var(--mono); }
+  .range-bar-wrap .lbls .current { color: var(--accent); font-weight: 700; }
+
+  .fundamentals-stat-row { display: flex; gap: 14px; margin: 0 0 16px; flex-wrap: wrap; }
+  .fundamentals-stat-row .detail-stat { flex: 1; min-width: 140px; }
+  .section-label { font-size: 0.85rem; text-transform: uppercase; color: var(--text-dim); margin: 22px 0 10px; letter-spacing: 0.04em; }
+
+  .insights-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 24px; margin-bottom: 16px; }
+  @media (max-width: 760px) { .insights-grid { grid-template-columns: 1fr; } }
+  .insight-col h3 { margin: 0 0 8px; font-size: 0.8rem; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.04em; }
+
+  .peer-badge { display: inline-block; padding: 5px 12px; margin: 0 6px 6px 0; border: 1px solid var(--border); border-radius: 14px; font-size: 0.8rem; font-family: var(--mono); color: var(--text); background: rgba(255,255,255,0.03); }
+
+  .news-item { padding: 11px 0; border-bottom: 1px solid var(--border); }
+  .news-item:last-child { border-bottom: none; }
+  .news-item .news-headline { font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 600; color: var(--text); text-decoration: none; display: block; margin-bottom: 3px; }
+  .news-item .news-headline:hover { color: var(--accent-2); }
+  .news-item .news-meta { font-size: 0.74rem; color: var(--text-dim); font-family: var(--mono); }
+  .news-item .news-summary { font-family: 'Inter', sans-serif; font-size: 0.84rem; color: var(--text-dim); margin: 4px 0 0; line-height: 1.5; }
+
+  .portfolio-news-item { padding: 10px 0; border-bottom: 1px solid var(--border); display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+  .portfolio-news-item:last-child { border-bottom: none; }
+  .portfolio-news-item .pn-ticker { font-family: var(--mono); font-size: 0.74rem; font-weight: 700; color: var(--accent); flex-shrink: 0; min-width: 44px; }
+  .portfolio-news-item .news-headline { font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 600; color: var(--text); text-decoration: none; }
+  .portfolio-news-item .news-headline:hover { color: var(--accent-2); }
+  .portfolio-news-item .news-meta { font-size: 0.72rem; color: var(--text-dim); font-family: var(--mono); width: 100%; }
+
   nav.tabs {
     display: flex;
-    gap: 2px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 16px;
+    gap: 6px;
     flex-wrap: wrap;
+    padding: 10px 22px 14px;
   }
   nav.tabs button {
-    background: transparent;
-    border: none;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid transparent;
     color: var(--text-dim);
-    padding: 8px 14px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    letter-spacing: 0.03em;
+    padding: 10px 20px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     cursor: pointer;
-    border-bottom: 2px solid transparent;
+    border-radius: 5px;
+    transition: background .15s ease, color .15s ease, border-color .15s ease;
   }
+  nav.tabs button:hover { color: var(--text); background: rgba(255,255,255,0.07); }
   nav.tabs button.active {
-    color: var(--accent);
-    border-bottom-color: var(--accent);
+    color: #1a1305;
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 2px 8px rgba(212,175,106,0.25);
   }
 
   .panel { display: none; }
@@ -165,57 +257,58 @@
   }
   .kpi-card {
     background: var(--panel);
-    padding: 10px 14px;
+    padding: 16px 18px;
   }
   .kpi-card .label {
     color: var(--text-dim);
-    font-size: 0.66rem;
+    font-size: 0.74rem;
     text-transform: uppercase;
     letter-spacing: 0.07em;
-    margin-bottom: 5px;
+    margin-bottom: 7px;
   }
   .kpi-card .value {
     font-family: var(--mono);
-    font-size: 1.22rem;
+    font-size: 1.65rem;
     font-weight: 700;
   }
   .kpi-card .sub-value {
     font-family: var(--mono);
-    font-size: 0.66rem;
-    margin-top: 3px;
+    font-size: 0.76rem;
+    margin-top: 4px;
     color: var(--text-dim);
   }
   #kpi-warning {
     color: var(--red);
-    font-size: 0.76rem;
-    margin: -4px 0 14px;
+    font-size: 0.86rem;
+    margin: -4px 0 16px;
     min-height: 1em;
-    font-family: var(--mono);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
   }
 
   .card {
     background: var(--panel);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 14px 16px;
-    margin-bottom: 16px;
+    padding: 18px 20px;
+    margin-bottom: 18px;
     transition: box-shadow .15s ease, border-color .15s ease;
   }
   .card:hover { box-shadow: 0 0 0 1px rgba(212,175,106,0.15); }
   .card h2 {
-    margin: 0 0 4px;
-    font-size: 0.85rem;
+    margin: 0 0 6px;
+    font-size: 1rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     color: var(--text-dim);
   }
   .card .card-note {
-    font-size: 0.72rem;
+    font-size: 0.88rem;
     color: var(--text-dim);
-    font-family: var(--mono);
-    margin: 0 0 12px;
-    line-height: 1.5;
+    font-family: 'Inter', sans-serif;
+    margin: 0 0 14px;
+    line-height: 1.6;
   }
   .chart-box { position: relative; height: 300px; }
   .chart-box.tall { height: 340px; }
@@ -232,16 +325,16 @@
   table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.78rem;
+    font-size: 0.92rem;
   }
   thead th {
     text-align: left;
     color: var(--text-dim);
     font-weight: 600;
-    font-size: 0.66rem;
+    font-size: 0.76rem;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    padding: 6px 8px;
+    padding: 11px 12px;
     background: var(--panel-2);
     border-bottom: 1px solid var(--border);
     border-right: 1px solid var(--border);
@@ -251,9 +344,9 @@
   }
   thead th:last-child { border-right: none; }
   thead th:hover { color: var(--text); }
-  thead th .arrow { opacity: 0.6; font-size: 0.65rem; margin-left: 3px; }
+  thead th .arrow { opacity: 0.6; font-size: 0.7rem; margin-left: 3px; }
   tbody td {
-    padding: 6px 8px;
+    padding: 10px 12px;
     border-bottom: 1px solid rgba(255,255,255,0.04);
     border-right: 1px solid rgba(255,255,255,0.03);
     white-space: nowrap;
@@ -289,21 +382,33 @@
   }
   footer.note {
     color: var(--text-dim);
-    font-size: 0.72rem;
-    margin-top: 24px;
-    line-height: 1.6;
-    font-family: var(--mono);
+    font-size: 0.86rem;
+    margin-top: 32px;
+    line-height: 1.75;
+    font-family: 'Inter', sans-serif;
+    border-top: 1px solid var(--border);
+    padding-top: 18px;
   }
+  footer.note a { color: var(--accent-2); font-weight: 600; text-decoration: none; }
+  footer.note a:hover { text-decoration: underline; }
   @media (max-width: 640px) {
-    .kpi-card .value { font-size: 1rem; }
-    .status-block { text-align: left; }
+    .kpi-card .value { font-size: 1.15rem; }
+    .status-block { text-align: left; align-items: flex-start; }
   }
 
   .ticker-cell.clickable, .tchip-label.clickable {
     cursor: pointer;
-    text-decoration: underline dotted rgba(110,168,254,0.5);
+    color: var(--accent-2);
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(110,168,254,0.55);
   }
-  .ticker-cell.clickable:hover, .tchip-label.clickable:hover { color: var(--accent-2); }
+  .ticker-cell.clickable::after, .tchip-label.clickable::after {
+    content: "↗";
+    font-size: 0.72em;
+    margin-left: 5px;
+    opacity: 0.75;
+  }
+  .ticker-cell.clickable:hover, .tchip-label.clickable:hover { color: var(--accent); border-bottom-color: var(--accent); }
 
   .modal-overlay {
     display: none;
@@ -324,27 +429,29 @@
     width: 100%;
     max-height: 88vh;
     overflow-y: auto;
-    padding: 22px 24px;
+    padding: 28px 30px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.5);
   }
-  .modal-box.wide { max-width: 920px; }
+  .modal-box-wrap { position: relative; max-width: 720px; width: 100%; }
+  .modal-box-wrap .modal-box { max-width: none; }
+  .modal-box-wrap.wide { max-width: 940px; }
   .modal-box h2 {
     margin: 0 0 12px;
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     text-transform: none;
     color: var(--accent);
     letter-spacing: 0;
   }
-  .modal-box p { line-height: 1.6; font-size: 0.86rem; color: var(--text); }
+  .modal-box p { line-height: 1.65; font-size: 0.95rem; color: var(--text); }
   .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px; }
   .modal-btn {
     background: var(--accent);
     color: #1a1305;
     border: none;
     border-radius: 4px;
-    padding: 8px 18px;
+    padding: 9px 20px;
     font-weight: 700;
-    font-size: 0.82rem;
+    font-size: 0.88rem;
     cursor: pointer;
   }
   .modal-btn.secondary {
@@ -354,97 +461,143 @@
   }
   .modal-close-x {
     position: absolute;
-    top: 14px;
-    right: 18px;
-    background: none;
-    border: none;
+    top: -12px;
+    right: -12px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 50%;
     color: var(--text-dim);
-    font-size: 1.1rem;
+    font-size: 1rem;
     cursor: pointer;
+    z-index: 5;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.45);
   }
-  .modal-box-wrap { position: relative; }
+  .modal-close-x:hover { color: var(--text); border-color: var(--accent-2); }
 
-  .detail-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; margin-bottom: 6px; }
-  .detail-title { font-size: 1.15rem; font-weight: 800; }
-  .detail-sub { color: var(--text-dim); font-size: 0.78rem; margin-top: 2px; }
-  .detail-price { font-family: var(--mono); font-size: 1.6rem; font-weight: 700; text-align: right; }
-  .detail-chg { font-family: var(--mono); font-size: 0.84rem; text-align: right; margin-top: 2px; }
+  .detail-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; margin-bottom: 8px; }
+  .detail-title { font-size: 1.5rem; font-weight: 800; }
+  .detail-sub { color: var(--text-dim); font-size: 0.9rem; margin-top: 3px; }
+  .detail-price { font-family: var(--mono); font-size: 2rem; font-weight: 700; text-align: right; }
+  .detail-chg { font-family: var(--mono); font-size: 0.94rem; text-align: right; margin-top: 3px; }
 
   .detail-stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 1px;
     background: var(--border);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     overflow: hidden;
-    margin: 14px 0;
+    margin: 16px 0;
   }
-  .detail-stat { background: var(--panel-2); padding: 8px 12px; }
-  .detail-stat .label { color: var(--text-dim); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
-  .detail-stat .value { font-family: var(--mono); font-size: 0.86rem; font-weight: 600; }
+  @media (max-width: 640px) {
+    .detail-stats-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .detail-stat { background: var(--panel-2); padding: 12px 14px; }
+  .detail-stat .label { color: var(--text-dim); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 5px; }
+  .detail-stat .value { font-family: var(--mono); font-size: 1rem; font-weight: 600; }
 
-  .range-btn-row { display: flex; gap: 4px; margin: 12px 0 8px; }
+  .range-btn-row { display: flex; gap: 5px; margin: 14px 0 10px; }
   .range-btn {
     background: transparent;
     border: 1px solid var(--border);
     color: var(--text-dim);
     border-radius: 4px;
-    padding: 4px 11px;
-    font-size: 0.72rem;
+    padding: 6px 14px;
+    font-size: 0.8rem;
     font-family: var(--mono);
     cursor: pointer;
   }
   .range-btn.active { background: var(--accent); color: #1a1305; border-color: var(--accent); font-weight: 700; }
   .detail-chart-box { position: relative; height: 220px; margin-bottom: 14px; }
 
-  .profile-block p { font-size: 0.82rem; color: var(--text-dim); }
+  .profile-card {
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    margin-top: 10px;
+  }
+  .profile-card h3 { margin: 0 0 8px; font-size: 1rem; color: var(--accent); }
+  .profile-card p { font-size: 0.94rem; line-height: 1.65; color: var(--text); margin: 0; }
+  .profile-meta { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 12px; font-size: 0.8rem; color: var(--text-dim); font-family: var(--mono); }
+  .profile-meta strong { color: var(--text); }
   .profile-block a { color: var(--accent-2); text-decoration: none; }
 
-  .compare-section { border-top: 1px solid var(--border); margin-top: 18px; padding-top: 14px; }
+  .compare-section { border-top: 1px solid var(--border); margin-top: 20px; padding-top: 16px; }
   .compare-checks { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; }
   .compare-check-label {
     font-family: var(--mono);
-    font-size: 0.74rem;
+    font-size: 0.84rem;
     color: var(--text-dim);
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
     cursor: pointer;
     border: 1px solid var(--border);
     border-radius: 4px;
-    padding: 4px 9px;
+    padding: 6px 12px;
   }
   .compare-check-label input { accent-color: var(--accent); }
-  .compare-table-wrap table { font-size: 0.74rem; }
+  .compare-table-wrap table { font-size: 0.86rem; }
 
-  .overview-extra-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-  @media (max-width: 800px) { .overview-extra-grid { grid-template-columns: 1fr; } }
-
-  .movers-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .movers-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
   .movers-row:last-child { border-bottom: none; }
-  .movers-row .name { font-family: var(--mono); font-weight: 700; font-size: 0.82rem; }
-  .movers-row .co { color: var(--text-dim); font-size: 0.68rem; margin-left: 6px; }
-  .movers-row .chg { font-family: var(--mono); font-weight: 700; font-size: 0.82rem; }
+  .movers-row .name { font-family: var(--mono); font-weight: 700; font-size: 0.95rem; }
+  .movers-row .co { color: var(--text-dim); font-size: 0.78rem; margin-left: 6px; }
+  .movers-row .chg { font-family: var(--mono); font-weight: 700; font-size: 0.95rem; }
 
-  .sector-bar-outer { display: flex; height: 22px; border-radius: 4px; overflow: hidden; border: 1px solid var(--border); margin-bottom: 10px; }
-  .sector-bar-seg { display: flex; align-items: center; justify-content: center; font-size: 0.6rem; font-family: var(--mono); font-weight: 700; color: #08101e; white-space: nowrap; overflow: hidden; }
-  .sector-bar-legend { display: flex; flex-wrap: wrap; gap: 10px; font-size: 0.7rem; color: var(--text-dim); font-family: var(--mono); }
-  .sector-bar-legend .dot { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 4px; }
+  .sector-bar-outer { display: flex; height: 26px; border-radius: 4px; overflow: hidden; border: 1px solid var(--border); margin-bottom: 12px; }
+  .sector-bar-seg { display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-family: var(--mono); font-weight: 700; color: #08101e; white-space: nowrap; overflow: hidden; }
+  .sector-bar-legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.82rem; color: var(--text-dim); font-family: var(--mono); }
+  .sector-bar-legend .dot { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 5px; }
 
-  .risk-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.78rem; }
+  .risk-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.9rem; flex-wrap: wrap; gap: 6px; }
   .risk-item:last-child { border-bottom: none; }
   .risk-item .rlabel { color: var(--text-dim); }
   .risk-item .rvalue { font-family: var(--mono); font-weight: 700; }
-  .risk-pill { font-size: 0.62rem; font-weight: 700; padding: 2px 7px; border-radius: 10px; margin-left: 8px; font-family: var(--mono); }
+  .risk-pill { font-size: 0.72rem; font-weight: 700; padding: 3px 9px; border-radius: 10px; margin-left: 8px; font-family: var(--mono); }
   .risk-pill.ok { background: rgba(61,220,151,0.15); color: var(--green); border: 1px solid rgba(61,220,151,0.4); }
   .risk-pill.warn { background: rgba(255,107,107,0.15); color: var(--red); border: 1px solid rgba(255,107,107,0.4); }
 
-  footer.note.short { margin-top: 18px; }
+  .sector-detail-card { border-left: 3px solid var(--accent); background: var(--panel-2); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 12px; }
+  .sector-detail-card h3 { margin: 0 0 8px; font-size: 0.95rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; color: var(--text); }
+  .sector-detail-card h3 .num { color: var(--text-dim); font-size: 0.82rem; }
+  .sector-holding-row { display: grid; grid-template-columns: 70px 1fr 110px 110px 110px; gap: 10px; align-items: center; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.84rem; }
+  .sector-holding-row:last-child { border-bottom: none; }
+  @media (max-width: 700px) { .sector-holding-row { grid-template-columns: 1fr; gap: 2px; } }
+
+  .spotlight-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 14px; margin-bottom: 14px; }
+  .spotlight-select {
+    background: var(--panel-2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 9px 14px;
+    font-family: var(--mono);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    max-width: 100%;
+  }
+  .spotlight-price-row { display: flex; align-items: baseline; gap: 12px; margin-top: 10px; flex-wrap: wrap; }
+  .spotlight-price-row .price { font-family: var(--mono); font-size: 1.9rem; font-weight: 800; }
+  .spotlight-price-row .chg { font-family: var(--mono); font-size: 0.98rem; font-weight: 700; }
+  .spotlight-grid { display: grid; grid-template-columns: 1fr 300px; gap: 20px; }
+  @media (max-width: 800px) { .spotlight-grid { grid-template-columns: 1fr; } }
+  .spotlight-details-col h3 { margin: 0 0 10px; font-size: 0.85rem; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.05em; }
+  .spotlight-detail-row { display: flex; justify-content: space-between; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.88rem; }
+  .spotlight-detail-row:last-child { border-bottom: none; }
+  .spotlight-detail-row .l { color: var(--text-dim); }
+  .spotlight-detail-row .v { font-family: var(--mono); font-weight: 700; text-align: right; }
+
+  footer.note.short { margin-top: 24px; }
 </style>
 </head>
 <body>
@@ -455,9 +608,11 @@
   <div class="modal-box">
     <h2>Disclaimer — Please Read</h2>
     <p>This dashboard is a class project for AFM 241 Assignment 2 (University of Waterloo). It is illustrative
-    only and is not investment advice, a research report, or an offer to buy or sell any security. Prices and
-    historical data are pulled live from Finnhub's API but may be delayed, incomplete, or temporarily unavailable;
-    where a data point can't be fetched, the dashboard flags it explicitly rather than estimating it. Cost basis
+    only and is not investment advice, a research report, or an offer to buy or sell any security. Live quotes,
+    company profile, fundamentals, news, peers, and analyst recommendations are pulled from Finnhub's API; daily
+    price history (the line charts and sparklines) is pulled from Twelve Data's API. Either source may be delayed,
+    incomplete, or temporarily unavailable; where a data point can't be fetched, the dashboard flags it explicitly
+    rather than estimating it. Cost basis
     figures are provisional placeholders being used for this assignment, not real transaction records. Past
     performance shown in any chart does not predict future results. No real money is managed by this tool.</p>
     <div class="modal-actions">
@@ -468,34 +623,41 @@
 
 <!-- PER-HOLDING DETAIL MODAL -->
 <div class="modal-overlay" id="detail-overlay">
-  <div class="modal-box wide modal-box-wrap">
+  <div class="modal-box-wrap wide">
     <button class="modal-close-x" onclick="closeDetailModal()">✕</button>
-    <div id="detail-modal-content">Loading…</div>
+    <div class="modal-box">
+      <div id="detail-modal-content">Loading…</div>
+    </div>
   </div>
 </div>
 
 <div class="wrap">
 
-  <header class="top">
-    <div class="brand">
-      <h1><span class="mark">▲</span>Northpoint Growth Fund</h1>
-      <div class="sub">Live Investment Dashboard — AFM 241 Assignment 2</div>
-    </div>
-    <div class="status-block">
-      <div id="as-of-label">Data as of —</div>
-      <div id="data-status"></div>
-      <button class="refresh-btn" id="refresh-btn" onclick="refreshDashboard()">↻ Refresh data</button>
-    </div>
-  </header>
+  <div class="topbar">
+    <header class="top">
+      <div class="brand">
+        <h1><span class="mark">▲</span>Northpoint Growth Fund</h1>
+        <div class="sub">Live Investment Dashboard — AFM 241 Assignment 2</div>
+      </div>
+      <div class="status-block">
+        <div class="market-pill" id="market-pill"><span class="market-dot"></span><span id="market-pill-label">Checking market hours…</span></div>
+        <div class="market-caveat">Based on NYSE regular hours (9:30am–4:00pm ET, Mon–Fri); doesn't account for market holidays.</div>
+        <div id="as-of-label">Data as of —</div>
+        <div id="data-status"></div>
+        <button class="refresh-btn" id="refresh-btn" onclick="refreshDashboard()">↻ Refresh data</button>
+      </div>
+    </header>
 
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="overview">Overview</button>
+      <button class="tab-btn" data-tab="holdings">Holdings</button>
+      <button class="tab-btn" data-tab="allocation">Allocation</button>
+      <button class="tab-btn" data-tab="mandate">Mandate</button>
+    </nav>
+  </div>
+
+  <div class="ticker-strip-label">Live Watchlist — click any ticker for full detail</div>
   <div class="ticker-strip" id="ticker-strip"></div>
-
-  <nav class="tabs">
-    <button class="tab-btn active" data-tab="overview">Overview</button>
-    <button class="tab-btn" data-tab="holdings">Holdings</button>
-    <button class="tab-btn" data-tab="allocation">Allocation</button>
-    <button class="tab-btn" data-tab="mandate">Mandate</button>
-  </nav>
 
   <!-- OVERVIEW -->
   <section class="panel active" id="panel-overview">
@@ -504,14 +666,42 @@
       <div class="kpi-card"><div class="label">Day Change</div><div class="value num" id="kpi-daychange-dollar">—</div><div class="sub-value num" id="kpi-daychange-pct"></div></div>
       <div class="kpi-card"><div class="label">Total Return ($)</div><div class="value num" id="kpi-return-dollar">—</div></div>
       <div class="kpi-card"><div class="label">Total Return (%)</div><div class="value num" id="kpi-return-pct">—</div></div>
-      <div class="kpi-card"><div class="label">Cash</div><div class="value num" id="kpi-cash">—</div><div class="sub-value" id="kpi-cash-pct"></div></div>
+      <div class="kpi-card"><div class="label">Cash</div><div class="value num" id="kpi-cash">—</div></div>
       <div class="kpi-card"><div class="label">Holdings</div><div class="value num" id="kpi-holdings">—</div></div>
     </div>
     <div id="kpi-warning"></div>
 
     <div class="card">
-      <h2>Portfolio Value — Last Trading Days</h2>
-      <p class="card-note" id="portfolio-history-note">Loading historical data…</p>
+      <div class="spotlight-header">
+        <div>
+          <select class="spotlight-select" id="spotlight-select" onchange="onSpotlightChange(this.value)"></select>
+          <div class="spotlight-price-row">
+            <span class="price num" id="spotlight-price">—</span>
+            <span class="chg num" id="spotlight-chg"></span>
+          </div>
+          <p class="card-note" id="spotlight-note" style="margin-top:10px; margin-bottom:0;">Pick any holding to see its real price history, 52-week range, and fundamentals — same live data used everywhere else on this dashboard.</p>
+        </div>
+      </div>
+      <div class="spotlight-grid">
+        <div>
+          <div id="spotlight-price-range-btns"></div>
+          <div class="chart-box"><canvas id="spotlightPriceChart"></canvas></div>
+          <p class="card-note" id="spotlight-price-chart-note"></p>
+          <div id="spotlight-range-bar"></div>
+          <h3 style="font-size:0.8rem; text-transform:uppercase; color:var(--text-dim); margin:18px 0 8px;">Fundamentals (TTM)</h3>
+          <div class="chart-box"><canvas id="spotlightChart"></canvas></div>
+          <p class="card-note" id="spotlight-chart-note"></p>
+        </div>
+        <div class="spotlight-details-col">
+          <h3>Details</h3>
+          <div id="spotlight-details-content">Loading…</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Today's Day Change, by Holding</h2>
+      <p class="card-note" id="portfolio-history-note">Loading…</p>
       <div class="chart-box tall"><canvas id="portfolioHistoryChart"></canvas></div>
     </div>
 
@@ -522,18 +712,18 @@
       <div class="chart-box"><canvas id="performanceChart"></canvas></div>
     </div>
 
-    <div class="overview-extra-grid">
-      <div class="card">
-        <h2>Today's Movers</h2>
-        <p class="card-note">Best and worst day-change among the 7 holdings, from live quote data.</p>
-        <div id="movers-content">Loading…</div>
-      </div>
+    <div class="card">
+      <h2>Today's Movers</h2>
+      <p class="card-note">Best and worst day-change among the 7 holdings, from live quote data.</p>
+      <div id="movers-content">Loading…</div>
+    </div>
 
-      <div class="card">
-        <h2>Sector Exposure</h2>
-        <p class="card-note">Share of net worth by sector, cash included. Mandate target: 4–5 sectors.</p>
-        <div id="sector-bar-content">Loading…</div>
-      </div>
+    <div class="card">
+      <h2>Portfolio News</h2>
+      <p class="card-note">Most recent headlines across all 7 holdings, via Finnhub's company-news feed (last 14
+      days). Click into any ticker's detail view for a fuller per-company news, peers, and analyst-recommendation
+      breakdown.</p>
+      <div id="portfolio-news-content">Loading…</div>
     </div>
 
     <div class="card">
@@ -548,6 +738,8 @@
   <section class="panel" id="panel-holdings">
     <div class="card">
       <h2>Holdings</h2>
+      <p class="card-note">Tip: ticker symbols marked with ↗ are clickable — they open a detail view with price
+      range, company profile, historical chart, and a tool to compare against this fund's other holdings.</p>
       <div class="table-scroll">
         <table id="holdings-table">
           <thead>
@@ -576,6 +768,9 @@
   <section class="panel" id="panel-allocation">
     <div class="card">
       <h2>Allocation by Sector</h2>
+      <p class="card-note">Current allocation across all 7 holdings plus cash, valued at live market prices where
+      available. Any holding whose live quote fails to fetch falls back to its cost-basis value here rather than
+      being silently dropped from the total.</p>
       <div class="allocation-grid">
         <div class="chart-box"><canvas id="allocationChart"></canvas></div>
         <div class="table-scroll">
@@ -591,6 +786,27 @@
           </table>
         </div>
       </div>
+    </div>
+
+    <div class="card">
+      <h2>Sector Exposure vs. Mandate</h2>
+      <p class="card-note">Share of net worth by sector, cash included. Mandate target: 4–5 sectors.</p>
+      <div id="sector-bar-content">Loading…</div>
+    </div>
+
+    <div class="card">
+      <h2>Sector Deep-Dive</h2>
+      <p class="card-note">Every holding broken out by sector — its dollar value, its weight within that sector,
+      and its weight in the whole portfolio. Useful for spotting whether a sector's exposure is actually spread
+      across multiple names or concentrated in just one.</p>
+      <div id="sector-deepdive-content">Loading…</div>
+    </div>
+
+    <div class="card">
+      <h2>Concentration Snapshot (HHI)</h2>
+      <p class="card-note">A second lens on diversification, separate from the mandate's 4–5 sector count rule
+      above — this measures how unevenly net worth is spread across sectors.</p>
+      <div id="hhi-content">Loading…</div>
     </div>
   </section>
 
@@ -638,33 +854,48 @@
   </section>
 
   <footer class="note short">
-    Class project, illustrative only — not investment advice. Live data via Finnhub (server-side); failed fetches
-    are flagged, never invented. <a href="#" onclick="openDisclaimerModal(); return false;" style="color: var(--accent-2);">Full disclaimer</a>
+    Class project, illustrative only — not investment advice. Live data via Finnhub and Twelve Data (server-side);
+    failed fetches are flagged, never invented. <a href="#" onclick="openDisclaimerModal(); return false;" style="color: var(--accent-2);">Full disclaimer</a>
   </footer>
 </div>
 
 <script>
 const TICKERS_ENDPOINT = "/.netlify/functions/quotes";
-const HISTORY_ENDPOINT = "/.netlify/functions/history";
+// Real daily price history now comes from Twelve Data (td-history.js), not
+// Finnhub's history.js, because Finnhub's free-tier key used on this project
+// returns a 403 on /stock/candle (see README.md). history.js is left in the
+// repo, unused, in case a future Finnhub plan restores candle access.
+const HISTORY_ENDPOINT = "/.netlify/functions/td-history";
 const PROFILE_ENDPOINT = "/.netlify/functions/profile";
+const METRICS_ENDPOINT = "/.netlify/functions/metrics";
+const NEWS_ENDPOINT = "/.netlify/functions/news";
+const PEERS_ENDPOINT = "/.netlify/functions/peers";
+const RECOMMENDATION_ENDPOINT = "/.netlify/functions/recommendation";
 
 let holdingsData = null;
 let liveQuotes = {};
 let historyData = {};
 let profileData = {};
-let profilesLoaded = false;
+let metricsData = {};
+let peersData = {};
+let recommendationData = {};
+let newsData = {};
+let profilesLoaded = false; // also gates metrics/peers/recommendations — these change rarely within a session
 let lastFetchedAt = null;
 let lastError = null;
 let sortState = { key: "weight", dir: "desc" };
 let perfChart = null;
 let allocChart = null;
 let portfolioHistChart = null;
-let sparkCharts = {};
 let detailChart = null;
 let detailCompareChart = null;
+let recommendationChart = null;
 let currentDetailTicker = null;
-let currentDetailRange = "1Y";
-const RANGE_DAYS = { "5D": 5, "1M": 22, "3M": 65, "6M": 130, "1Y": 365 };
+let spotlightPriceChart = null;
+let spotlightPriceRange = "3M";
+let detailPriceChart = null;
+let detailPriceRange = "3M";
+let comparePriceChart = null;
 
 function fmtUSD(n) {
   if (n === null || n === undefined || Number.isNaN(n)) return "—";
@@ -704,6 +935,34 @@ async function loadProfiles(tickers) {
   const url = `${PROFILE_ENDPOINT}?tickers=${tickers.join(",")}`;
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error(`Profile function returned status ${res.status}`);
+  return res.json();
+}
+
+async function loadMetrics(tickers) {
+  const url = `${METRICS_ENDPOINT}?tickers=${tickers.join(",")}`;
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error(`Metrics function returned status ${res.status}`);
+  return res.json();
+}
+
+async function loadPeers(tickers) {
+  const url = `${PEERS_ENDPOINT}?tickers=${tickers.join(",")}`;
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error(`Peers function returned status ${res.status}`);
+  return res.json();
+}
+
+async function loadRecommendations(tickers) {
+  const url = `${RECOMMENDATION_ENDPOINT}?tickers=${tickers.join(",")}`;
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error(`Recommendation function returned status ${res.status}`);
+  return res.json();
+}
+
+async function loadNews(tickers) {
+  const url = `${NEWS_ENDPOINT}?tickers=${tickers.join(",")}`;
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error(`News function returned status ${res.status}`);
   return res.json();
 }
 
@@ -773,19 +1032,59 @@ async function refreshDashboard() {
       historyData = { __topLevelError: histErr.message };
     }
 
-    // Company profiles (name/industry/website/market cap) change essentially
-    // never within a session, so only fetch them once rather than on every
-    // refresh click.
+    // Company profiles, fundamentals/metrics, peers, and recommendation
+    // trends all change essentially never (or only quarterly) within a
+    // single session, so they're only fetched once rather than on every
+    // refresh click — unlike quotes, which are refetched every time.
     if (!profilesLoaded) {
       try {
         const profResp = await loadProfiles(tickers);
         profileData = {};
         (profResp.profiles || []).forEach((p) => { profileData[p.ticker] = p; });
         if (profResp.error) profileData.__topLevelError = profResp.error;
-        profilesLoaded = true;
       } catch (profErr) {
         profileData = { __topLevelError: profErr.message };
       }
+
+      try {
+        const metResp = await loadMetrics(tickers);
+        metricsData = {};
+        (metResp.metrics || []).forEach((m) => { metricsData[m.ticker] = m; });
+        if (metResp.error) metricsData.__topLevelError = metResp.error;
+      } catch (metErr) {
+        metricsData = { __topLevelError: metErr.message };
+      }
+
+      try {
+        const peerResp = await loadPeers(tickers);
+        peersData = {};
+        (peerResp.peerSets || []).forEach((p) => { peersData[p.ticker] = p; });
+        if (peerResp.error) peersData.__topLevelError = peerResp.error;
+      } catch (peerErr) {
+        peersData = { __topLevelError: peerErr.message };
+      }
+
+      try {
+        const recResp = await loadRecommendations(tickers);
+        recommendationData = {};
+        (recResp.recommendations || []).forEach((r) => { recommendationData[r.ticker] = r; });
+        if (recResp.error) recommendationData.__topLevelError = recResp.error;
+      } catch (recErr) {
+        recommendationData = { __topLevelError: recErr.message };
+      }
+
+      profilesLoaded = true;
+    }
+
+    // News is genuinely time-sensitive, so it's refetched on every manual
+    // refresh click (there's no auto-polling here, so this stays cheap).
+    try {
+      const newsResp = await loadNews(tickers);
+      newsData = {};
+      (newsResp.news || []).forEach((n) => { newsData[n.ticker] = n; });
+      if (newsResp.error) newsData.__topLevelError = newsResp.error;
+    } catch (newsErr) {
+      newsData = { __topLevelError: newsErr.message };
     }
 
     render();
@@ -799,6 +1098,7 @@ async function refreshDashboard() {
 function render() {
   const rows = computeRows();
   renderTickerStrip(rows);
+  renderSpotlight();
   renderKPIs(rows);
   renderTable(rows);
   renderPerformanceChart(rows);
@@ -806,7 +1106,10 @@ function render() {
   renderSectorTable(rows);
   renderPortfolioHistoryChart(rows);
   renderMovers(rows);
+  renderPortfolioNews(rows);
   renderSectorBar(rows);
+  renderSectorDeepDive(rows);
+  renderConcentrationCard(rows);
   renderRiskSnapshot(rows);
   const ts = lastFetchedAt ? new Date(lastFetchedAt).toUTCString() : "unknown";
   document.getElementById("as-of-label").textContent = `Data as of ${ts}`;
@@ -816,48 +1119,77 @@ function render() {
   if (currentDetailTicker) renderDetailModalContent(currentDetailTicker);
 }
 
+const TCHIP_PALETTE = ["#d4af6a", "#6ea8fe", "#3ddc97", "#ff6b6b", "#b48ef0", "#5fd0d0", "#f0c75f"];
+
 function renderTickerStrip(rows) {
   const strip = document.getElementById("ticker-strip");
-  strip.innerHTML = rows.map((r) => {
+  strip.innerHTML = rows.map((r, i) => {
+    const color = TCHIP_PALETTE[i % TCHIP_PALETTE.length];
+    const shortName = r.company.split(" ")[0].replace(",", "");
+    const badge = `<div class="tchip-badge" style="background:${color}22;">
+      <div class="tchip-avatar" style="background:${color};">${r.ticker.charAt(0)}</div>
+      <span class="tchip-co-name">${shortName}</span>
+    </div>`;
+
     if (!r.ok) {
-      return `<div class="ticker-chip"><div class="tchip-label clickable" onclick="openDetailModal('${r.ticker}')">${r.ticker}</div><span class="flag-badge">NO DATA</span></div>`;
+      return `<div class="ticker-chip" onclick="openDetailModal('${r.ticker}')">
+        <div class="tchip-top-row">
+          ${badge}
+          <div class="tchip-top-right">
+            <div class="tchip-label clickable">${r.ticker}</div>
+            <span class="flag-badge">NO DATA</span>
+          </div>
+        </div>
+        <div class="tchip-value-row"><span class="spark-na">Live price unavailable</span></div>
+      </div>`;
     }
+
+    const up = r.dayChangePct >= 0;
+    const arrow = up ? "▲" : "▼";
+
+    // Day's-range mini bar: where today's live price (q.c) sits between
+    // today's low (q.l) and high (q.h) — all from the unrestricted quote
+    // endpoint, so this works even with no history data at all.
+    const q = liveQuotes[r.ticker];
+    let rangeBarHtml = `<span class="spark-na">range n/a</span>`;
+    if (q && typeof q.l === "number" && typeof q.h === "number" && typeof q.c === "number") {
+      const span = q.h - q.l;
+      const pos = span > 0 ? Math.min(100, Math.max(0, ((q.c - q.l) / span) * 100)) : 50;
+      rangeBarHtml = `<div class="day-range-mini">
+        <div class="bar"><div class="fill" style="width:${pos}%;"></div><div class="marker" style="left:${pos}%;"></div></div>
+        <div class="lbls"><span>${fmtUSD(q.l)}</span><span>${fmtUSD(q.h)}</span></div>
+      </div>`;
+    }
+
+    // Real 1-month sparkline, now that Twelve Data supplies actual daily
+    // closes (historyData[ticker]) — null if history failed for this
+    // ticker, in which case the chip shows "trend n/a" rather than a fake
+    // flat line.
     const hist = historyData[r.ticker];
-    const histOk = hist && hist.ok && hist.closes && hist.closes.length > 1;
-    const cls = r.dayChangePct >= 0 ? "text-green" : "text-red";
-    const arrow = r.dayChangePct >= 0 ? "▲" : "▼";
-    return `<div class="ticker-chip">
-      <div class="tchip-label clickable" onclick="openDetailModal('${r.ticker}')">${r.ticker}</div>
-      <div class="tchip-row">
-        <div class="tchip-price">${fmtUSD(r.currentPrice)}</div>
-        ${histOk ? `<canvas class="spark" id="spark-${r.ticker}" width="60" height="22"></canvas>` : `<span class="spark-na">no history</span>`}
+    const sparkCloses = hist && hist.ok && Array.isArray(hist.closes) ? hist.closes.slice(-22) : null;
+    const sparkSvg = sparkCloses ? sparklineSvg(sparkCloses) : null;
+    const sparkHtml = sparkSvg
+      ? `<div><div class="tchip-mini-label">1M Trend</div>${sparkSvg}</div>`
+      : `<div><div class="tchip-mini-label">1M Trend</div><span class="spark-na">trend n/a</span></div>`;
+
+    return `<div class="ticker-chip" onclick="openDetailModal('${r.ticker}')">
+      <div class="tchip-top-row">
+        ${badge}
+        <div class="tchip-top-right">
+          <div class="tchip-label clickable">${r.ticker}</div>
+          <span class="tchip-chg-pill ${up ? "up" : "down"}">${arrow} ${fmtPct(r.dayChangePct)}</span>
+        </div>
       </div>
-      <div class="tchip-chg ${cls}">${arrow} ${fmtPct(r.dayChangePct)}</div>
+      <div class="tchip-value-row">
+        <div>
+          <div class="tchip-mini-label">Price</div>
+          <div class="tchip-price">${fmtUSD(r.currentPrice)}</div>
+        </div>
+        ${sparkHtml}
+        ${rangeBarHtml}
+      </div>
     </div>`;
   }).join("");
-
-  rows.forEach((r) => {
-    const hist = historyData[r.ticker];
-    if (!hist || !hist.ok || !hist.closes || hist.closes.length < 2) return;
-    const canvas = document.getElementById(`spark-${r.ticker}`);
-    if (!canvas) return;
-    const closes = hist.closes.slice(-20);
-    const up = closes[closes.length - 1] >= closes[0];
-    if (sparkCharts[r.ticker]) sparkCharts[r.ticker].destroy();
-    sparkCharts[r.ticker] = new Chart(canvas, {
-      type: "line",
-      data: {
-        labels: closes.map((_, i) => i),
-        datasets: [{ data: closes, borderColor: up ? "#3ddc97" : "#ff6b6b", borderWidth: 1.4, pointRadius: 0, fill: false, tension: 0.25 }],
-      },
-      options: {
-        responsive: false,
-        animation: false,
-        plugins: { legend: { display: false }, tooltip: { enabled: false } },
-        scales: { x: { display: false }, y: { display: false } },
-      },
-    });
-  });
 }
 
 function renderKPIs(rows) {
@@ -882,9 +1214,6 @@ function renderKPIs(rows) {
   document.getElementById("kpi-holdings").textContent = rows.length;
   document.getElementById("kpi-daychange-dollar").textContent = totalDayChangeDollar === null ? "—" : fmtUSD(totalDayChangeDollar);
   document.getElementById("kpi-daychange-pct").textContent = totalDayChangePct === null ? "" : fmtPct(totalDayChangePct);
-
-  const cashPct = netWorth ? (cash / netWorth) * 100 : null;
-  document.getElementById("kpi-cash-pct").textContent = cashPct === null ? "" : `${cashPct.toFixed(2)}% of NAV — mandate target 5–10%`;
 
   const dEl = document.getElementById("kpi-return-dollar");
   const pEl = document.getElementById("kpi-return-pct");
@@ -1047,67 +1376,55 @@ function renderSectorTable(rows) {
   }).join("");
 }
 
+// HISTORY NOTE: this dashboard's Finnhub API key returns an explicit 403
+// ("You don't have access to this resource") on /stock/candle, confirmed by
+// directly testing the deployed history.js endpoint — that endpoint is
+// documented as restricted on Finnhub's free tier. Real daily price history
+// (used by the Spotlight/detail-modal/compare line charts and the ticker
+// strip's sparklines) now comes from Twelve Data's /time_series endpoint
+// instead (td-history.js), not Finnhub. This chart specifically (today's
+// day-change %) stays a bar chart rather than a line chart because it's a
+// single-day snapshot across all 7 holdings, not a per-ticker time series.
+// Company profile and basic-financials metrics (52-week range, P/E, margins,
+// growth, etc.) still come from Finnhub via metrics.js, since those
+// endpoints are NOT restricted on this plan. historyData/loadHistory() are
+// also still used as a fallback inside calc52WeekRange() if Twelve Data
+// fails for a ticker but enough history rows came through anyway.
 function renderPortfolioHistoryChart(rows) {
   const note = document.getElementById("portfolio-history-note");
   const canvas = document.getElementById("portfolioHistoryChart");
 
-  const okHist = rows.filter((r) => historyData[r.ticker] && historyData[r.ticker].ok && historyData[r.ticker].closes && historyData[r.ticker].closes.length > 1);
-  const failedHist = rows.filter((r) => !(historyData[r.ticker] && historyData[r.ticker].ok));
-
-  if (okHist.length === 0) {
+  const okRows = rows.filter((r) => r.ok && r.dayChangePct !== null);
+  if (okRows.length === 0) {
     if (portfolioHistChart) { portfolioHistChart.destroy(); portfolioHistChart = null; }
-    const reason = historyData.__topLevelError ? ` (${historyData.__topLevelError})` : "";
-    note.textContent = `Historical data unavailable for all holdings${reason}. This usually means the Finnhub API key's plan doesn't include candle/historical access — check finnhub.io/docs/api/stock-candles and your account's plan page to confirm before assuming this is a bug.`;
+    note.textContent = "No live day-change data available right now.";
     return;
   }
 
-  const minLen = Math.min(...okHist.map((r) => historyData[r.ticker].closes.length));
-  const refTicker = okHist[0].ticker;
-  const refTimes = historyData[refTicker].times.slice(-minLen);
-  const labels = refTimes.map((t) => new Date(t * 1000).toLocaleDateString("en-US", { month: "short", day: "numeric" }));
-
-  const constantFromFailed = failedHist.reduce((s, r) => s + r.costBasisValue, 0);
-  const cash = holdingsData.cash;
-
-  const series = new Array(minLen).fill(0).map((_, j) => {
-    let val = cash + constantFromFailed;
-    okHist.forEach((r) => {
-      const closes = historyData[r.ticker].closes.slice(-minLen);
-      val += closes[j] * r.shares;
-    });
-    return val;
-  });
+  const sorted = [...okRows].sort((a, b) => b.dayChangePct - a.dayChangePct);
+  const labels = sorted.map((r) => r.ticker);
+  const data = sorted.map((r) => r.dayChangePct);
+  const colors = data.map((v) => (v >= 0 ? "rgba(61,220,151,0.8)" : "rgba(255,107,107,0.8)"));
 
   if (portfolioHistChart) portfolioHistChart.destroy();
   portfolioHistChart = new Chart(canvas, {
-    type: "line",
-    data: {
-      labels,
-      datasets: [{
-        label: "Portfolio Value (Illustrative)",
-        data: series,
-        borderColor: "#d4af6a",
-        backgroundColor: "rgba(212,175,106,0.12)",
-        fill: true,
-        tension: 0.2,
-        pointRadius: 0,
-        borderWidth: 2,
-      }],
-    },
+    type: "bar",
+    data: { labels, datasets: [{ label: "Day Change %", data, backgroundColor: colors, borderRadius: 3 }] },
     options: {
       responsive: true,
       maintainAspectRatio: false,
       plugins: { legend: { display: false } },
       scales: {
-        x: { ticks: { color: "#8295b8", font: { family: "IBM Plex Mono", size: 10 }, maxRotation: 0, autoSkip: true }, grid: { color: "rgba(255,255,255,0.04)" } },
-        y: { ticks: { color: "#8295b8", font: { family: "IBM Plex Mono", size: 10 }, callback: (v) => "$" + (v / 1000).toFixed(0) + "k" }, grid: { color: "rgba(255,255,255,0.04)" } },
+        x: { ticks: { color: "#8295b8", font: { family: "IBM Plex Mono", size: 11 } }, grid: { display: false } },
+        y: { ticks: { color: "#8295b8", font: { family: "IBM Plex Mono", size: 10 }, callback: (v) => v + "%" }, grid: { color: "rgba(255,255,255,0.04)" } },
       },
     },
   });
 
-  note.textContent = failedHist.length
-    ? `⚠ Historical data unavailable for: ${failedHist.map((r) => r.ticker).join(", ")} — their cost-basis value is held constant in this chart instead of being excluded, so the line understates real day-to-day variability. Illustrative only: assumes current share counts held over this period using real historical closes; shares were only actually purchased 2026-06-23.`
-    : "Illustrative only: shows what this exact share count would be worth using real historical closing prices for each holding. Shares were only actually purchased on 2026-06-23, so this is a backtest view, not actual fund history.";
+  const missing = rows.filter((r) => !r.ok || r.dayChangePct === null);
+  note.textContent = missing.length
+    ? `Live day-change %, from today's quote data. Missing for: ${missing.map((r) => r.ticker).join(", ")}.`
+    : "Live day-change %, from today's quote data for all 7 holdings.";
 }
 
 document.querySelectorAll(".tab-btn").forEach((btn) => {
@@ -1154,6 +1471,42 @@ function renderMovers(rows) {
     </div>`;
   };
   el.innerHTML = rowHtml("Top Gainer Today", gainer) + rowHtml("Top Loser Today", loser);
+}
+
+function newsTimeAgo(ms) {
+  if (!ms) return "";
+  const diffH = (Date.now() - ms) / 36e5;
+  if (diffH < 1) return "just now";
+  if (diffH < 24) return `${Math.round(diffH)}h ago`;
+  return `${Math.round(diffH / 24)}d ago`;
+}
+
+function renderPortfolioNews(rows) {
+  const el = document.getElementById("portfolio-news-content");
+  if (!el) return;
+
+  const allArticles = [];
+  rows.forEach((r) => {
+    const n = newsData[r.ticker];
+    if (n && n.ok && Array.isArray(n.articles)) {
+      n.articles.forEach((a) => allArticles.push({ ...a, ticker: r.ticker }));
+    }
+  });
+
+  if (allArticles.length === 0) {
+    const reason = newsData.__topLevelError ? ` (${newsData.__topLevelError})` : "";
+    el.innerHTML = `<p class="card-note" style="margin:0;">No recent news found across these 7 holdings in the last 14 days${reason}. If this stays empty, check finnhub.io/docs/api/company-news and your account's plan page before assuming it's a bug.</p>`;
+    return;
+  }
+
+  const top = allArticles.sort((a, b) => (b.datetime || 0) - (a.datetime || 0)).slice(0, 8);
+  el.innerHTML = top.map((a) => `
+    <div class="portfolio-news-item">
+      <span class="pn-ticker">${a.ticker}</span>
+      <a class="news-headline" href="${a.url || "#"}" target="_blank" rel="noopener">${a.headline || "(no headline)"}</a>
+      <span class="news-meta">${a.source || "Unknown source"}${a.datetime ? " · " + newsTimeAgo(a.datetime) : ""}</span>
+    </div>
+  `).join("");
 }
 
 function renderSectorBar(rows) {
@@ -1232,13 +1585,417 @@ function renderRiskSnapshot(rows) {
   `;
 }
 
+function renderSectorDeepDive(rows) {
+  const el = document.getElementById("sector-deepdive-content");
+  if (!el) return;
+  const { netWorth } = computePortfolioTotals(rows);
+  const palette = ["#d4af6a", "#6ea8fe", "#3ddc97", "#ff6b6b", "#b48ef0", "#5fd0d0", "#f0c75f"];
+  const bySector = {};
+  rows.forEach((r) => {
+    const val = r.ok ? r.totalValue : r.costBasisValue;
+    if (!bySector[r.sector]) bySector[r.sector] = { total: 0, holdings: [] };
+    bySector[r.sector].total += val;
+    bySector[r.sector].holdings.push({ ...r, val });
+  });
+  const entries = Object.entries(bySector).sort((a, b) => b[1].total - a[1].total);
+
+  const sectorCards = entries.map(([sector, data], i) => {
+    const sectorPct = netWorth ? (data.total / netWorth) * 100 : 0;
+    const rowsHtml = [...data.holdings].sort((a, b) => b.val - a.val).map((h) => {
+      const withinSector = data.total ? (h.val / data.total) * 100 : 0;
+      const withinPortfolio = netWorth ? (h.val / netWorth) * 100 : 0;
+      return `<div class="sector-holding-row">
+        <span class="ticker-cell">${h.ticker}</span>
+        <span class="company-cell">${h.company}</span>
+        <span class="num">${fmtUSD(h.val)}</span>
+        <span class="num">${withinSector.toFixed(1)}% of sector</span>
+        <span class="num">${withinPortfolio.toFixed(1)}% of NAV</span>
+      </div>`;
+    }).join("");
+    return `<div class="sector-detail-card" style="border-left-color:${palette[i % palette.length]}">
+      <h3><span>${sector} <span style="color:var(--text-dim); font-weight:400;">(${data.holdings.length} holding${data.holdings.length === 1 ? "" : "s"})</span></span><span class="num">${fmtUSD(data.total)} · ${sectorPct.toFixed(1)}% of NAV</span></h3>
+      ${rowsHtml}
+    </div>`;
+  }).join("");
+
+  const cashPct = netWorth ? (holdingsData.cash / netWorth) * 100 : 0;
+  const cashCard = `<div class="sector-detail-card" style="border-left-color:#5c6b85;">
+    <h3><span>Cash <span style="color:var(--text-dim); font-weight:400;">(not a sector — held as a stabilizer per the mandate's 5–10% cash band)</span></span><span class="num">${fmtUSD(holdingsData.cash)} · ${cashPct.toFixed(1)}% of NAV</span></h3>
+  </div>`;
+
+  el.innerHTML = sectorCards + cashCard;
+}
+
+function renderConcentrationCard(rows) {
+  const el = document.getElementById("hhi-content");
+  if (!el) return;
+  const { netWorth } = computePortfolioTotals(rows);
+  if (!netWorth) {
+    el.innerHTML = `<p class="card-note" style="margin:0;">Waiting on live data…</p>`;
+    return;
+  }
+  const bySector = sectorBreakdown(rows); // includes Cash, shared denominator logic
+  const weights = Object.values(bySector).map((v) => (v / netWorth) * 100);
+  // HHI = sum of each segment's squared % share, on a 0-10,000 scale —
+  // a standard concentration formula, computed here from this portfolio's
+  // own live-derived sector weights (not an invented number).
+  const hhi = weights.reduce((s, w) => s + w * w, 0);
+  let band;
+  if (hhi < 1500) band = "Low concentration";
+  else if (hhi < 2500) band = "Moderate concentration";
+  else band = "High concentration";
+  const sectorCount = Object.keys(bySector).filter((s) => s !== "Cash").length;
+
+  el.innerHTML = `
+    <div class="risk-item">
+      <div class="rlabel">Herfindahl-Hirschman Index across ${sectorCount} sectors + cash</div>
+      <div class="rvalue">${hhi.toFixed(0)} <span class="risk-pill ${hhi < 2500 ? "ok" : "warn"}">${band}</span></div>
+    </div>
+    <p class="card-note">HHI sums each segment's squared share of net worth (0–10,000 scale; a fully equal split
+    across N segments gives 10,000/N). I am not fully certain there is one single universal cutoff for
+    "low/moderate/high" — the bands shown here (roughly &lt;1,500 / 1,500–2,500 / &gt;2,500) are commonly cited
+    rules of thumb adapted from antitrust concentration analysis, not an official Northpoint mandate rule. You may
+    want to verify these specific cutoffs from a primary source before citing them; treat this as a directional
+    signal on how evenly net worth is spread across sectors, not a pass/fail test.</p>
+  `;
+}
+
+// ---------------------------------------------------------------------
+// HOLDING SPOTLIGHT (dropdown-driven chart + details, inspired by a
+// "select any instrument, see its chart and stats" layout)
+// ---------------------------------------------------------------------
+
+let spotlightTicker = null;
+let spotlightChart = null;
+
+// Fundamentals fields shown as a percent bar chart (Spotlight, detail modal,
+// and the compare chart all reuse this same list so every percent-style
+// chart on the dashboard uses one consistent unit/scale — never mixing a
+// ratio like P/E into a chart whose axis is meant to read as "%").
+const FUNDAMENTALS_PCT_FIELDS = [
+  { key: "grossMarginTTM", label: "Gross Margin" },
+  { key: "netMarginTTM", label: "Net Margin" },
+  { key: "roeTTM", label: "ROE" },
+  { key: "roaTTM", label: "ROA" },
+  { key: "revenueGrowthTTM", label: "Rev Growth" },
+  { key: "epsGrowthTTM", label: "EPS Growth" },
+];
+
+// Prefers Finnhub's own 52-week high/low (from /stock/metric), since
+// /stock/candle — which would otherwise be used to derive this range from
+// raw history — is plan-restricted on this Finnhub key (confirmed via a
+// direct 403 from the deployed endpoint). Falls back to a history-derived
+// range only if metrics are unavailable, and to null ("no data") if neither
+// source has it. Never a guessed number.
+function calc52WeekRange(ticker) {
+  const m = metricsData[ticker];
+  if (m && m.ok && m.fieldsFound && m.fieldsFound.week52High && m.fieldsFound.week52Low) {
+    return { high: m.values.week52High, low: m.values.week52Low, source: "metrics" };
+  }
+  const hist = historyData[ticker];
+  if (hist && hist.ok && hist.highs && hist.lows && hist.highs.length > 0) {
+    const days = hist.highs.length;
+    return { high: Math.max(...hist.highs), low: Math.min(...hist.lows), days, partial: days < 200, source: "history" };
+  }
+  return null;
+}
+
+function range52Label(range52) {
+  if (!range52) return "52-Week Range";
+  if (range52.source === "history" && range52.partial) return `${range52.days}-Day Range`;
+  return "52-Week Range";
+}
+
+function rangeBarHtml(range52, current) {
+  if (!range52) return `<p class="card-note">No 52-week range data available for this holding right now.</p>`;
+  const { low, high } = range52;
+  const span = high - low;
+  const showMarker = typeof current === "number";
+  const pos = span > 0 && showMarker ? Math.min(100, Math.max(0, ((current - low) / span) * 100)) : 50;
+  return `<div class="range-bar-wrap">
+    <div class="bar">
+      <div class="fill" style="width:${pos}%;"></div>
+      ${showMarker ? `<div class="marker" style="left:${pos}%;"></div>` : ""}
+    </div>
+    <div class="lbls">
+      <span>${fmtUSD(low)}</span>
+      ${showMarker ? `<span class="current">${fmtUSD(current)} now</span>` : ""}
+      <span>${fmtUSD(high)}</span>
+    </div>
+  </div>`;
+}
+
+// Shared fundamentals percent bar chart used by both the Spotlight card and
+// the detail modal. Only plots fields Finnhub actually returned
+// (fieldsFound === true) — a missing field is omitted rather than shown as
+// zero, since zero would falsely read as "this margin is 0%".
+// Real daily-close price history, now sourced from Twelve Data's
+// /time_series endpoint (td-history.js) rather than Finnhub's /stock/candle,
+// which returns a 403 on this project's Finnhub key (see README.md). This
+// restores actual line charts — the fundamentals bar chart below remains as
+// an ADDITIONAL section, not a replacement, since both data sources are now
+// available. If Twelve Data fails for a ticker (unconfirmed free-tier
+// rate/credit limits — see README), this returns chart:null with the real
+// error message instead of inventing a price.
+const PRICE_RANGE_OPTIONS = [
+  { key: "1M", label: "1M", days: 22 },
+  { key: "3M", label: "3M", days: 65 },
+  { key: "6M", label: "6M", days: 130 },
+  { key: "1Y", label: "1Y", days: 260 },
+  { key: "MAX", label: "Max", days: Infinity },
+];
+
+function drawPriceLineChart(canvas, ticker, rangeKey) {
+  const hist = historyData[ticker];
+  if (!hist || !hist.ok || !Array.isArray(hist.closes) || hist.closes.length === 0) {
+    return { chart: null, errorNote: (hist && hist.error) ? hist.error : "no price history available" };
+  }
+  const opt = PRICE_RANGE_OPTIONS.find((o) => o.key === rangeKey) || PRICE_RANGE_OPTIONS[1];
+  const n = hist.closes.length;
+  const start = Number.isFinite(opt.days) ? Math.max(0, n - opt.days) : 0;
+  const closes = hist.closes.slice(start);
+  const times = (hist.times || []).slice(start);
+  const labels = times.map((t) => new Date(t * 1000).toLocaleDateString("en-US", { month: "short", day: "numeric" }));
+
+  const up = closes.length > 1 ? closes[closes.length - 1] >= closes[0] : true;
+  const chart = new Chart(canvas, {
+    type: "line",
+    data: {
+      labels,
+      datasets: [{
+        data: closes,
+        borderColor: up ? "#3ddc97" : "#ff6b6b",
+        backgroundColor: up ? "rgba(61,220,151,0.08)" : "rgba(255,107,107,0.08)",
+        fill: true,
+        tension: 0.15,
+        pointRadius: 0,
+        borderWidth: 2,
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { color: "#8295b8", font: { family: "IBM Plex Mono", size: 9 }, maxTicksLimit: 8 }, grid: { display: false } },
+        y: { ticks: { color: "#8295b8", font: { family: "IBM Plex Mono", size: 10 }, callback: (v) => "$" + v }, grid: { color: "rgba(255,255,255,0.04)" } },
+      },
+    },
+  });
+  return { chart, errorNote: null, pointCount: closes.length };
+}
+
+function priceRangeButtonsHtml(activeRange, onClickFnName) {
+  return `<div class="range-btn-row">${PRICE_RANGE_OPTIONS.map((o) =>
+    `<button class="range-btn${o.key === activeRange ? " active" : ""}" onclick="${onClickFnName}('${o.key}')">${o.label}</button>`
+  ).join("")}</div>`;
+}
+
+// Tiny inline-SVG sparkline for the ticker strip — deliberately NOT a
+// Chart.js instance (would mean 7 extra Chart.js objects just for a 64px
+// strip), built from the same real Twelve Data closes used everywhere else.
+function sparklineSvg(closes) {
+  if (!Array.isArray(closes) || closes.length < 2) return null;
+  const w = 64, h = 24;
+  const min = Math.min(...closes), max = Math.max(...closes);
+  const span = max - min || 1;
+  const pts = closes.map((c, i) => {
+    const x = (i / (closes.length - 1)) * w;
+    const y = h - ((c - min) / span) * h;
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(" ");
+  const up = closes[closes.length - 1] >= closes[0];
+  const color = up ? "#3ddc97" : "#ff6b6b";
+  return `<svg class="spark" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>`;
+}
+
+function drawFundamentalsChart(canvas, ticker) {
+  const m = metricsData[ticker];
+  if (!m || !m.ok) {
+    return { chart: null, errorNote: (m && m.error) ? m.error : "metrics data not available" };
+  }
+  const usable = FUNDAMENTALS_PCT_FIELDS.filter((f) => m.fieldsFound && m.fieldsFound[f.key]);
+  if (usable.length === 0) {
+    return { chart: null, errorNote: "none of the expected fundamentals fields were present in Finnhub's response for this ticker" };
+  }
+  const labels = usable.map((f) => f.label);
+  const data = usable.map((f) => m.values[f.key]);
+  const chart = new Chart(canvas, {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [{
+        data,
+        backgroundColor: data.map((v) => (v >= 0 ? "rgba(61,220,151,0.55)" : "rgba(255,107,107,0.55)")),
+        borderRadius: 4,
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { color: "#8295b8", font: { family: "IBM Plex Mono", size: 10 } }, grid: { display: false } },
+        y: { ticks: { color: "#8295b8", font: { family: "IBM Plex Mono", size: 10 }, callback: (v) => v + "%" }, grid: { color: "rgba(255,255,255,0.04)" } },
+      },
+    },
+  });
+  return { chart, errorNote: null };
+}
+
+function populateSpotlightSelect() {
+  const sel = document.getElementById("spotlight-select");
+  if (!sel || !holdingsData) return;
+  if (!spotlightTicker) spotlightTicker = holdingsData.holdings[0].ticker;
+  sel.innerHTML = holdingsData.holdings.map((h) => `<option value="${h.ticker}">${h.ticker} — ${h.company}</option>`).join("");
+  sel.value = spotlightTicker;
+}
+
+function onSpotlightChange(ticker) {
+  spotlightTicker = ticker;
+  renderSpotlight();
+}
+
+function renderSpotlight() {
+  if (!holdingsData) return;
+  populateSpotlightSelect();
+  const ticker = spotlightTicker;
+  const h = holdingsData.holdings.find((x) => x.ticker === ticker);
+  if (!h) return;
+
+  const q = liveQuotes[ticker];
+  const ok = !!(q && q.ok);
+  const prof = profileData[ticker];
+  const profOk = prof && prof.ok;
+  const range52 = calc52WeekRange(ticker);
+  const m = metricsData[ticker];
+
+  document.getElementById("spotlight-price").textContent = ok ? fmtUSD(q.c) : "—";
+  const chgEl = document.getElementById("spotlight-chg");
+  if (ok) {
+    const cls = q.d >= 0 ? "text-green" : "text-red";
+    const arrow = q.d >= 0 ? "▲" : "▼";
+    chgEl.className = `chg num ${cls}`;
+    chgEl.textContent = `${arrow} ${fmtUSD(q.d)} (${fmtPct(q.dp)}) today`;
+  } else {
+    chgEl.className = "chg num text-dim";
+    chgEl.textContent = "Live data unavailable for this holding right now.";
+  }
+
+  const rangeBarEl = document.getElementById("spotlight-range-bar");
+  if (rangeBarEl) rangeBarEl.innerHTML = rangeBarHtml(range52, ok ? q.c : null);
+
+  const marketCapStr = profOk && prof.marketCapitalizationMillions ? fmtUSD(prof.marketCapitalizationMillions * 1_000_000) : "—";
+  const peStr = m && m.ok && m.fieldsFound && m.fieldsFound.peTTM ? m.values.peTTM.toFixed(1) : "not available";
+  const deStr = m && m.ok && m.fieldsFound && m.fieldsFound.debtToEquity ? m.values.debtToEquity.toFixed(2) : "not available";
+
+  const detailsEl = document.getElementById("spotlight-details-content");
+  const row = (l, v) => `<div class="spotlight-detail-row"><div class="l">${l}</div><div class="v">${v}</div></div>`;
+  detailsEl.innerHTML = [
+    row("Previous Close", ok ? fmtUSD(q.pc) : "—"),
+    row("Open", ok ? fmtUSD(q.o) : "—"),
+    row("Day's Range", ok ? `${fmtUSD(q.l)} – ${fmtUSD(q.h)}` : "—"),
+    row(range52Label(range52), range52 ? `${fmtUSD(range52.low)} – ${fmtUSD(range52.high)}` : "no data"),
+    row("P/E (TTM)", peStr),
+    row("Debt/Equity", deStr),
+    row("Market Cap", marketCapStr),
+    row("Primary Exchange", profOk && prof.exchange ? prof.exchange : "—"),
+    row("Sector (mandate)", h.sector),
+    row("Your Shares", h.shares.toLocaleString()),
+    row("Your Position Value", ok ? fmtUSD(q.c * h.shares) : "—"),
+  ].join("");
+
+  renderSpotlightPriceChart();
+  renderSpotlightChart();
+}
+
+function setSpotlightPriceRange(rangeKey) {
+  spotlightPriceRange = rangeKey;
+  renderSpotlightPriceChart();
+}
+
+function renderSpotlightPriceChart() {
+  const btnsEl = document.getElementById("spotlight-price-range-btns");
+  const note = document.getElementById("spotlight-price-chart-note");
+  const canvas = document.getElementById("spotlightPriceChart");
+  if (!canvas) return;
+  const ticker = spotlightTicker;
+
+  if (btnsEl) btnsEl.innerHTML = priceRangeButtonsHtml(spotlightPriceRange, "setSpotlightPriceRange");
+
+  if (spotlightPriceChart) { spotlightPriceChart.destroy(); spotlightPriceChart = null; }
+  const { chart, errorNote, pointCount } = drawPriceLineChart(canvas, ticker, spotlightPriceRange);
+  spotlightPriceChart = chart;
+
+  if (!chart) {
+    note.textContent = `Price history not available for ${ticker} right now (${errorNote}). This dashboard sources daily closes from Twelve Data's free tier — if every ticker shows this, check your TWELVEDATA_KEY and Twelve Data's current rate/credit limits at twelvedata.com/pricing before assuming the code is broken.`;
+    return;
+  }
+  note.textContent = `Daily close prices via Twelve Data (${pointCount} trading day${pointCount === 1 ? "" : "s"} shown). Free-tier credit/rate limits weren't confirmed from Twelve Data's docs beyond "1 credit per symbol per call" — if this chart goes blank later in a session, that's the most likely reason; see README.md.`;
+}
+
+function renderSpotlightChart() {
+  const note = document.getElementById("spotlight-chart-note");
+  const canvas = document.getElementById("spotlightChart");
+  if (!canvas) return;
+  const ticker = spotlightTicker;
+
+  if (spotlightChart) { spotlightChart.destroy(); spotlightChart = null; }
+  const { chart, errorNote } = drawFundamentalsChart(canvas, ticker);
+  spotlightChart = chart;
+
+  if (!chart) {
+    note.textContent = `Fundamentals chart not available for ${ticker} (${errorNote}).`;
+    return;
+  }
+  note.textContent = `Selected TTM fundamentals as reported by Finnhub, shown alongside the real price-history chart above. I'm not 100% certain every Finnhub field name above resolved correctly — verify any number that looks off at finnhub.io/docs/api/company-basic-financials.`;
+}
+
+// ---------------------------------------------------------------------
+// MARKET OPEN / CLOSED INDICATOR
+// ---------------------------------------------------------------------
+
+function updateMarketStatus() {
+  const pill = document.getElementById("market-pill");
+  const label = document.getElementById("market-pill-label");
+  if (!pill || !label) return;
+
+  // NYSE regular session: 9:30am-4:00pm America/New_York, Monday-Friday.
+  // This is computed entirely from the visitor's browser clock + the
+  // America/New_York timezone rules the browser already knows — it does
+  // NOT check a market-holiday calendar, so it will show "Market Open" on
+  // a weekday holiday when the exchange is actually closed. That caveat is
+  // shown to the user directly under the pill rather than hidden.
+  const now = new Date();
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    hour: "numeric",
+    minute: "numeric",
+    weekday: "short",
+    hour12: false,
+  }).formatToParts(now);
+  const get = (type) => { const p = parts.find((x) => x.type === type); return p ? p.value : null; };
+  const weekday = get("weekday");
+  let hour = parseInt(get("hour"), 10);
+  if (hour === 24) hour = 0; // some locales report midnight as 24
+  const minute = parseInt(get("minute"), 10);
+
+  const isWeekday = weekday && !["Sat", "Sun"].includes(weekday);
+  const minutesSinceMidnight = hour * 60 + minute;
+  const inSessionWindow = minutesSinceMidnight >= (9 * 60 + 30) && minutesSinceMidnight < (16 * 60);
+  const isOpen = !!(isWeekday && inSessionWindow);
+
+  pill.classList.toggle("open", isOpen);
+  pill.classList.toggle("closed", !isOpen);
+  label.textContent = isOpen ? "Market Open" : "Market Closed";
+}
+
 // ---------------------------------------------------------------------
 // PER-HOLDING DETAIL MODAL (price, ranges, fundamentals, chart, compare)
 // ---------------------------------------------------------------------
 
 function openDetailModal(ticker) {
   currentDetailTicker = ticker;
-  currentDetailRange = "1Y";
   document.getElementById("detail-overlay").classList.add("open");
   renderDetailModalContent(ticker);
 }
@@ -1248,30 +2005,21 @@ function closeDetailModal() {
   currentDetailTicker = null;
   if (detailChart) { detailChart.destroy(); detailChart = null; }
   if (detailCompareChart) { detailCompareChart.destroy(); detailCompareChart = null; }
-}
-
-function calc52WeekRange(hist) {
-  // Computed from real history candles already fetched (up to 370 days) —
-  // never a guessed figure. If fewer than ~252 trading days of history are
-  // available (e.g. a data-plan limit), this is explicitly labeled as a
-  // partial-period range rather than presented as a true 52-week figure.
-  if (!hist || !hist.ok || !hist.highs || !hist.lows || hist.highs.length === 0) return null;
-  const high = Math.max(...hist.highs);
-  const low = Math.min(...hist.lows);
-  const days = hist.highs.length;
-  return { high, low, days, partial: days < 200 };
+  if (recommendationChart) { recommendationChart.destroy(); recommendationChart = null; }
+  if (detailPriceChart) { detailPriceChart.destroy(); detailPriceChart = null; }
+  if (comparePriceChart) { comparePriceChart.destroy(); comparePriceChart = null; }
+  detailPriceRange = "3M"; // reset range picker per ticker so it doesn't carry over oddly between holdings
 }
 
 function renderDetailModalContent(ticker) {
   const container = document.getElementById("detail-modal-content");
   const h = holdingsData.holdings.find((x) => x.ticker === ticker);
   const q = liveQuotes[ticker];
-  const hist = historyData[ticker];
   const prof = profileData[ticker];
   if (!h) { container.innerHTML = `<p>Unknown ticker.</p>`; return; }
 
   const ok = !!(q && q.ok);
-  const range52 = calc52WeekRange(hist);
+  const range52 = calc52WeekRange(ticker);
   const dayCls = ok && q.d >= 0 ? "text-green" : "text-red";
   const dayArrow = ok && q.d >= 0 ? "▲" : "▼";
 
@@ -1294,7 +2042,7 @@ function renderDetailModalContent(ticker) {
 
     <div class="detail-stats-grid">
       <div class="detail-stat"><div class="label">Day's Range</div><div class="value">${ok ? `${fmtUSD(q.l)} – ${fmtUSD(q.h)}` : "—"}</div></div>
-      <div class="detail-stat"><div class="label">${range52 && range52.partial ? `${range52.days}-Day Range` : "52-Week Range"}</div><div class="value">${range52 ? `${fmtUSD(range52.low)} – ${fmtUSD(range52.high)}` : "no history"}</div></div>
+      <div class="detail-stat"><div class="label">${range52Label(range52)}</div><div class="value">${range52 ? `${fmtUSD(range52.low)} – ${fmtUSD(range52.high)}` : "no data"}</div></div>
       <div class="detail-stat"><div class="label">Open</div><div class="value">${ok ? fmtUSD(q.o) : "—"}</div></div>
       <div class="detail-stat"><div class="label">Prev. Close</div><div class="value">${ok ? fmtUSD(q.pc) : "—"}</div></div>
       <div class="detail-stat"><div class="label">Market Cap</div><div class="value">${marketCapStr}</div></div>
@@ -1303,18 +2051,54 @@ function renderDetailModalContent(ticker) {
       <div class="detail-stat"><div class="label">Your Position Value</div><div class="value">${ok ? fmtUSD(q.c * h.shares) : "—"}</div></div>
     </div>
 
-    <div class="range-btn-row" id="range-btn-row">
-      ${Object.keys(RANGE_DAYS).map((r) => `<button class="range-btn ${r === currentDetailRange ? "active" : ""}" onclick="setDetailRange('${r}')">${r}</button>`).join("")}
+    <h2 class="section-label" style="margin-top:6px;">Price History (via Twelve Data)</h2>
+    <div id="detail-price-range-btns"></div>
+    <div class="detail-chart-box" style="height:240px;"><canvas id="detailPriceChart"></canvas></div>
+    <p class="card-note" id="detail-price-chart-note" style="margin-top:-6px;"></p>
+
+    <div id="detail-range-bar"></div>
+
+    <h2 class="section-label" style="margin-top:6px;">Fundamentals (TTM, via Finnhub)</h2>
+    <div class="fundamentals-stat-row">
+      <div class="detail-stat"><div class="label">P/E (TTM)</div><div class="value">${metricsData[ticker] && metricsData[ticker].ok && metricsData[ticker].fieldsFound && metricsData[ticker].fieldsFound.peTTM ? metricsData[ticker].values.peTTM.toFixed(1) : "not available"}</div></div>
+      <div class="detail-stat"><div class="label">Debt/Equity</div><div class="value">${metricsData[ticker] && metricsData[ticker].ok && metricsData[ticker].fieldsFound && metricsData[ticker].fieldsFound.debtToEquity ? metricsData[ticker].values.debtToEquity.toFixed(2) : "not available"}</div></div>
     </div>
     <div class="detail-chart-box"><canvas id="detailChart"></canvas></div>
     <p class="card-note" id="detail-chart-note" style="margin-top:-6px;"></p>
 
     <div class="profile-block">
-      <h2 style="font-size:0.85rem; text-transform:uppercase; color:var(--text-dim); margin-top:18px;">Company Profile</h2>
+      <h2 style="font-size:0.85rem; text-transform:uppercase; color:var(--text-dim); margin-top:20px;">Company Profile</h2>
       ${profOk
-        ? `<p>${prof.name || h.company} is classified by Finnhub as operating in the <strong>${prof.industry || "—"}</strong> industry${prof.country ? `, headquartered in ${prof.country}` : ""}. Shares outstanding: ${prof.shareOutstandingMillions ? (prof.shareOutstandingMillions).toFixed(0) + "M" : "—"}.${prof.weburl ? ` <a href="${prof.weburl}" target="_blank" rel="noopener">${prof.weburl}</a>` : ""}</p>`
+        ? `<div class="profile-card">
+            <h3>About ${prof.name || h.company}</h3>
+            <p>${prof.name || h.company} (${h.ticker}) is held in this fund's <strong>${h.sector}</strong> sleeve and is
+            classified by Finnhub under the <strong>${prof.industry || "—"}</strong> industry${prof.country ? `, headquartered in ${prof.country}` : ""}.
+            It trades on the <strong>${prof.exchange || "—"}</strong>${prof.currency ? ` in ${prof.currency}` : ""}${prof.ipo ? `, and has been publicly listed since its IPO on ${prof.ipo}` : ""}.
+            ${marketCapStr !== "—" ? `Its current market capitalization is approximately ${marketCapStr}` : "Market capitalization is not available right now"}${prof.shareOutstandingMillions ? `, across roughly ${prof.shareOutstandingMillions.toFixed(0)}M shares outstanding` : ""}.
+            This fund holds ${h.shares.toLocaleString()} shares (${ok ? fmtUSD(q.c * h.shares) : "value unavailable"}), which Finnhub's profile feed does not know about — that figure comes from this dashboard's own holdings data, not from Finnhub.</p>
+            <div class="profile-meta">
+              ${prof.weburl ? `<span>Website: <a href="${prof.weburl}" target="_blank" rel="noopener">${prof.weburl}</a></span>` : ""}
+              <span>Sector (mandate): <strong>${h.sector}</strong></span>
+              <span>Finnhub industry: <strong>${prof.industry || "—"}</strong></span>
+            </div>
+          </div>`
         : `<p>Company profile data is not available right now${profileData.__topLevelError ? ` (${profileData.__topLevelError})` : ""}. This may mean the Finnhub plan in use doesn't include the /stock/profile2 endpoint — worth checking finnhub.io's current docs/plan page rather than assuming this is a bug.</p>`
       }
+    </div>
+
+    <h2 class="section-label">Insights — News, Peers &amp; Analyst Recommendations</h2>
+    <div class="insights-grid">
+      <div class="insight-col">
+        <h3>Recent News</h3>
+        <div id="detail-news-content">Loading…</div>
+      </div>
+      <div class="insight-col">
+        <h3>Peers (per Finnhub — not fund holdings)</h3>
+        <div id="detail-peers-content">Loading…</div>
+        <h3 style="margin-top:18px;">Analyst Recommendation Trends</h3>
+        <div class="detail-chart-box"><canvas id="recommendationChart"></canvas></div>
+        <p class="card-note" id="detail-recommendation-note" style="margin-top:-6px;"></p>
+      </div>
     </div>
 
     <div class="compare-section">
@@ -1332,64 +2116,137 @@ function renderDetailModalContent(ticker) {
     </div>
   `;
 
-  renderDetailChart(ticker, currentDetailRange);
+  const rangeBarEl = document.getElementById("detail-range-bar");
+  if (rangeBarEl) rangeBarEl.innerHTML = rangeBarHtml(range52, ok ? q.c : null);
+
+  renderDetailPriceChart(ticker);
+  renderDetailFundamentalsChart(ticker);
+  renderDetailNews(ticker);
+  renderDetailPeers(ticker);
+  renderDetailRecommendationChart(ticker);
 }
 
-function setDetailRange(range) {
-  currentDetailRange = range;
-  document.querySelectorAll("#range-btn-row .range-btn").forEach((b) => {
-    b.classList.toggle("active", b.textContent === range);
-  });
-  renderDetailChart(currentDetailTicker, range);
+function setDetailPriceRange(rangeKey) {
+  detailPriceRange = rangeKey;
+  renderDetailPriceChart(currentDetailTicker);
 }
 
-function renderDetailChart(ticker, range) {
+function renderDetailPriceChart(ticker) {
+  const btnsEl = document.getElementById("detail-price-range-btns");
+  const note = document.getElementById("detail-price-chart-note");
+  const canvas = document.getElementById("detailPriceChart");
+  if (!canvas) return;
+
+  if (btnsEl) btnsEl.innerHTML = priceRangeButtonsHtml(detailPriceRange, "setDetailPriceRange");
+
+  if (detailPriceChart) { detailPriceChart.destroy(); detailPriceChart = null; }
+  const { chart, errorNote, pointCount } = drawPriceLineChart(canvas, ticker, detailPriceRange);
+  detailPriceChart = chart;
+
+  if (!chart) {
+    if (note) note.textContent = `Price history not available for ${ticker} right now (${errorNote}). Sourced from Twelve Data's free tier — check TWELVEDATA_KEY and twelvedata.com/pricing for current limits before assuming this is a bug.`;
+    return;
+  }
+  if (note) note.textContent = `Daily close prices via Twelve Data (${pointCount} trading day${pointCount === 1 ? "" : "s"} shown).`;
+}
+
+function renderDetailFundamentalsChart(ticker) {
   const note = document.getElementById("detail-chart-note");
   const canvas = document.getElementById("detailChart");
-  const hist = historyData[ticker];
+  if (!canvas) return;
 
-  if (!hist || !hist.ok || !hist.closes || hist.closes.length < 2) {
-    if (detailChart) { detailChart.destroy(); detailChart = null; }
-    note.textContent = `No historical chart data available for ${ticker}${historyData.__topLevelError ? ` (${historyData.__topLevelError})` : ""}. If this happens for every holding, check whether your Finnhub plan includes /stock/candle.`;
+  if (detailChart) { detailChart.destroy(); detailChart = null; }
+  const { chart, errorNote } = drawFundamentalsChart(canvas, ticker);
+  detailChart = chart;
+
+  if (!chart) {
+    if (note) note.textContent = `Fundamentals chart not available for ${ticker} (${errorNote}).`;
+    return;
+  }
+  if (note) note.textContent = `Selected TTM fundamentals as reported by Finnhub, shown alongside the real price-history chart above. I'm not 100% certain every field name above resolved to the right metric — verify anything that looks off at finnhub.io/docs/api/company-basic-financials.`;
+}
+
+function renderDetailNews(ticker) {
+  const container = document.getElementById("detail-news-content");
+  if (!container) return;
+  const n = newsData[ticker];
+
+  if (!n || !n.ok) {
+    container.innerHTML = `<p class="card-note">News not available for ${ticker}${n && n.error ? ` (${n.error})` : ""}.</p>`;
+    return;
+  }
+  if (!n.articles || n.articles.length === 0) {
+    container.innerHTML = `<p class="card-note">${n.note || `No recent news found for ${ticker}.`}</p>`;
+    return;
+  }
+  container.innerHTML = n.articles.map((a) => `
+    <div class="news-item">
+      ${a.url ? `<a class="news-headline" href="${a.url}" target="_blank" rel="noopener">${a.headline || "(untitled)"}</a>` : `<span class="news-headline">${a.headline || "(untitled)"}</span>`}
+      <div class="news-meta">${a.source || "Unknown source"}${typeof a.datetime === "number" ? ` · ${newsTimeAgo(a.datetime)}` : ""}</div>
+      ${a.summary ? `<p class="news-summary">${a.summary}</p>` : ""}
+    </div>
+  `).join("");
+}
+
+function renderDetailPeers(ticker) {
+  const container = document.getElementById("detail-peers-content");
+  if (!container) return;
+  const p = peersData[ticker];
+
+  if (!p || !p.ok) {
+    container.innerHTML = `<p class="card-note">Peer data not available for ${ticker}${p && p.error ? ` (${p.error})` : ""}.</p>`;
+    return;
+  }
+  if (!p.peers || p.peers.length === 0) {
+    container.innerHTML = `<p class="card-note">${p.note || `Finnhub returned no peer list for ${ticker}.`}</p>`;
+    return;
+  }
+  container.innerHTML = `<p class="card-note" style="margin-bottom:8px;">Companies Finnhub classifies as competitors/peers for ${ticker} — these are NOT holdings in this fund.</p>` +
+    p.peers.map((pe) => `<span class="peer-badge">${pe}</span>`).join("");
+}
+
+function renderDetailRecommendationChart(ticker) {
+  const note = document.getElementById("detail-recommendation-note");
+  const canvas = document.getElementById("recommendationChart");
+  if (!canvas) return;
+  const r = recommendationData[ticker];
+
+  if (recommendationChart) { recommendationChart.destroy(); recommendationChart = null; }
+
+  if (!r || !r.ok || !r.periods || r.periods.length === 0) {
+    if (note) note.textContent = `Analyst recommendation data not available for ${ticker}${r && r.error ? ` (${r.error})` : ""}. If this happens for every holding, check finnhub.io/docs/api/recommendation-trends.`;
     return;
   }
 
-  const days = Math.min(RANGE_DAYS[range], hist.closes.length);
-  const closes = hist.closes.slice(-days);
-  const times = hist.times.slice(-days);
-  const labels = times.map((t) => new Date(t * 1000).toLocaleDateString("en-US", { month: "short", day: "numeric" }));
-  const up = closes[closes.length - 1] >= closes[0];
+  // Finnhub returns periods newest-first; reverse to oldest -> newest so the
+  // chart reads left-to-right like a timeline.
+  const ordered = [...r.periods].reverse();
+  const labels = ordered.map((p) => p.period || "—");
 
-  if (detailChart) detailChart.destroy();
-  detailChart = new Chart(canvas, {
-    type: "line",
+  recommendationChart = new Chart(canvas, {
+    type: "bar",
     data: {
       labels,
-      datasets: [{
-        data: closes,
-        borderColor: up ? "#3ddc97" : "#ff6b6b",
-        backgroundColor: up ? "rgba(61,220,151,0.08)" : "rgba(255,107,107,0.08)",
-        fill: true,
-        tension: 0.2,
-        pointRadius: 0,
-        borderWidth: 1.6,
-      }],
+      datasets: [
+        { label: "Strong Buy", data: ordered.map((p) => (typeof p.strongBuy === "number" ? p.strongBuy : 0)), backgroundColor: "#3ddc97" },
+        { label: "Buy", data: ordered.map((p) => (typeof p.buy === "number" ? p.buy : 0)), backgroundColor: "#8fe3c0" },
+        { label: "Hold", data: ordered.map((p) => (typeof p.hold === "number" ? p.hold : 0)), backgroundColor: "#8295b8" },
+        { label: "Sell", data: ordered.map((p) => (typeof p.sell === "number" ? p.sell : 0)), backgroundColor: "#f0a86e" },
+        { label: "Strong Sell", data: ordered.map((p) => (typeof p.strongSell === "number" ? p.strongSell : 0)), backgroundColor: "#ff6b6b" },
+      ],
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
+      plugins: { legend: { position: "top", labels: { color: "#e8edf7", font: { family: "IBM Plex Mono", size: 9 }, boxWidth: 10 } } },
       scales: {
-        x: { ticks: { color: "#8295b8", font: { family: "IBM Plex Mono", size: 10 }, maxRotation: 0, autoSkip: true }, grid: { display: false } },
-        y: { ticks: { color: "#8295b8", font: { family: "IBM Plex Mono", size: 10 } }, grid: { color: "rgba(255,255,255,0.04)" } },
+        x: { stacked: true, ticks: { color: "#8295b8", font: { family: "IBM Plex Mono", size: 9 } }, grid: { display: false } },
+        y: { stacked: true, ticks: { color: "#8295b8", font: { family: "IBM Plex Mono", size: 9 } }, grid: { color: "rgba(255,255,255,0.04)" } },
       },
     },
   });
 
-  const requestedDays = RANGE_DAYS[range];
-  note.textContent = days < requestedDays
-    ? `Showing all ${days} available trading days (less than the requested ${range} window — history only covers this much).`
-    : `Daily closes, real Finnhub historical data, last ${range}.`;
+  if (note) note.textContent = `Number of analysts per rating, by period — Finnhub's own counts, not a consensus this dashboard computes. Verify methodology at finnhub.io/docs/api/recommendation-trends.`;
 }
 
 function renderCompareSection(baseTicker) {
@@ -1399,20 +2256,23 @@ function renderCompareSection(baseTicker) {
   if (checked.length === 0) {
     output.innerHTML = "";
     if (detailCompareChart) { detailCompareChart.destroy(); detailCompareChart = null; }
+    if (comparePriceChart) { comparePriceChart.destroy(); comparePriceChart = null; }
     return;
   }
 
   const tickersToShow = [baseTicker, ...checked];
 
-  // Comparison table: price, day change, market cap, sector — all from
+  // Comparison table: price, day change, market cap, sector, P/E — all from
   // data already fetched (no extra API calls triggered by checking a box).
   const rowsHtml = tickersToShow.map((t) => {
     const h = holdingsData.holdings.find((x) => x.ticker === t);
     const q = liveQuotes[t];
     const prof = profileData[t];
+    const m = metricsData[t];
     const ok = !!(q && q.ok);
     const cls = ok && q.dp >= 0 ? "text-green" : "text-red";
     const cap = prof && prof.ok && prof.marketCapitalizationMillions ? fmtUSD(prof.marketCapitalizationMillions * 1_000_000) : "—";
+    const pe = m && m.ok && m.fieldsFound && m.fieldsFound.peTTM ? m.values.peTTM.toFixed(1) : "—";
     return `<tr>
       <td class="ticker-cell">${t}${t === baseTicker ? " (base)" : ""}</td>
       <td>${h.company}</td>
@@ -1420,56 +2280,95 @@ function renderCompareSection(baseTicker) {
       <td class="num">${ok ? fmtUSD(q.c) : "—"}</td>
       <td class="num ${cls}">${ok ? fmtPct(q.dp) : "—"}</td>
       <td class="num">${cap}</td>
+      <td class="num">${pe}</td>
     </tr>`;
   }).join("");
 
   output.innerHTML = `
     <div class="compare-table-wrap table-scroll" style="margin-top:10px;">
       <table>
-        <thead><tr><th>Ticker</th><th>Company</th><th>Sector</th><th class="num-h">Price</th><th class="num-h">Day %</th><th class="num-h">Market Cap</th></tr></thead>
+        <thead><tr><th>Ticker</th><th>Company</th><th>Sector</th><th class="num-h">Price</th><th class="num-h">Day %</th><th class="num-h">Market Cap</th><th class="num-h">P/E (TTM)</th></tr></thead>
         <tbody>${rowsHtml}</tbody>
       </table>
     </div>
+    <h3 style="font-size:0.8rem; text-transform:uppercase; color:var(--text-dim); margin:18px 0 8px;">Rebased Price History</h3>
+    <div id="compare-price-range-btns"></div>
+    <div class="detail-chart-box" style="margin-top:6px;"><canvas id="comparePriceChart"></canvas></div>
+    <p class="card-note" id="compare-price-chart-note" style="margin-top:-6px;"></p>
+    <h3 style="font-size:0.8rem; text-transform:uppercase; color:var(--text-dim); margin:18px 0 8px;">Fundamentals (TTM)</h3>
     <div class="detail-chart-box" style="margin-top:12px;"><canvas id="compareChart"></canvas></div>
-    <p class="card-note">Lines show % change over the last ${currentDetailRange} (rebased to 0% at the start of the window) so holdings at very different price levels can be compared directly. Same underlying historical data as the chart above — no extra fetches.</p>
+    <p class="card-note">Bars compare selected TTM fundamentals (% metrics only, as reported by Finnhub) across these holdings. A missing bar means Finnhub didn't return that field for that ticker; this dashboard never fills a gap with a guessed number.</p>
   `;
 
+  renderComparePriceChart(tickersToShow);
   renderCompareChart(tickersToShow);
 }
 
-function renderCompareChart(tickers) {
-  const canvas = document.getElementById("compareChart");
+let currentCompareTickers = [];
+let comparePriceRange = "3M";
+
+function setComparePriceRange(rangeKey) {
+  comparePriceRange = rangeKey;
+  renderComparePriceChart(currentCompareTickers);
+}
+
+// Rebased (% change from the start of the selected window) line chart
+// comparing real Twelve Data price history across the checked holdings —
+// this is the price-history compare chart that was replaced by the
+// fundamentals bar chart below during the earlier Finnhub-403 pivot, now
+// restored since Twelve Data supplies real daily closes.
+function renderComparePriceChart(tickers) {
+  currentCompareTickers = tickers;
+  const btnsEl = document.getElementById("compare-price-range-btns");
+  const note = document.getElementById("compare-price-chart-note");
+  const canvas = document.getElementById("comparePriceChart");
   if (!canvas) return;
+  if (btnsEl) btnsEl.innerHTML = priceRangeButtonsHtml(comparePriceRange, "setComparePriceRange");
+
+  const opt = PRICE_RANGE_OPTIONS.find((o) => o.key === comparePriceRange) || PRICE_RANGE_OPTIONS[1];
   const palette = ["#d4af6a", "#6ea8fe", "#3ddc97", "#ff6b6b", "#b48ef0", "#5fd0d0", "#f0c75f"];
 
-  const days = RANGE_DAYS[currentDetailRange];
-  const usable = tickers.filter((t) => historyData[t] && historyData[t].ok && historyData[t].closes && historyData[t].closes.length > 1);
+  const series = tickers.map((t) => {
+    const hist = historyData[t];
+    if (!hist || !hist.ok || !Array.isArray(hist.closes) || hist.closes.length === 0) return null;
+    const n = hist.closes.length;
+    const start = Number.isFinite(opt.days) ? Math.max(0, n - opt.days) : 0;
+    return { ticker: t, closes: hist.closes.slice(start), times: (hist.times || []).slice(start) };
+  });
+  const usable = series.filter(Boolean);
+
+  if (comparePriceChart) { comparePriceChart.destroy(); comparePriceChart = null; }
   if (usable.length === 0) {
-    if (detailCompareChart) { detailCompareChart.destroy(); detailCompareChart = null; }
+    if (note) note.textContent = "No real price history available for these holdings right now — check Twelve Data status (TWELVEDATA_KEY, rate limits) before assuming this is a bug.";
     return;
   }
 
-  const minLen = Math.min(days, ...usable.map((t) => historyData[t].closes.length));
-  const refTimes = historyData[usable[0]].times.slice(-minLen);
-  const labels = refTimes.map((t) => new Date(t * 1000).toLocaleDateString("en-US", { month: "short", day: "numeric" }));
+  // Different tickers can have slightly different available history
+  // lengths (e.g. a younger listing, or a gap from Twelve Data's free
+  // tier) — label axis uses whichever series has the most points, and
+  // shorter series are right-aligned (padded at the start with null,
+  // which Chart.js's spanGaps skips) rather than mislabeling dates.
+  const longest = usable.reduce((a, b) => (b.closes.length > a.closes.length ? b : a));
+  const labels = longest.times.map((t) => new Date(t * 1000).toLocaleDateString("en-US", { month: "short", day: "numeric" }));
 
-  const datasets = usable.map((t, i) => {
-    const closes = historyData[t].closes.slice(-minLen);
-    const base = closes[0];
-    const rebased = closes.map((c) => ((c - base) / base) * 100);
+  const datasets = usable.map((s, i) => {
+    const base = s.closes[0];
+    const rebased = s.closes.map((c) => (base ? ((c - base) / base) * 100 : 0));
+    const pad = labels.length - rebased.length;
+    const data = pad > 0 ? Array(pad).fill(null).concat(rebased) : rebased;
     return {
-      label: t,
-      data: rebased,
+      label: s.ticker,
+      data,
       borderColor: palette[i % palette.length],
-      borderWidth: 1.6,
+      backgroundColor: "transparent",
       pointRadius: 0,
+      borderWidth: 2,
       tension: 0.15,
-      fill: false,
+      spanGaps: true,
     };
   });
 
-  if (detailCompareChart) detailCompareChart.destroy();
-  detailCompareChart = new Chart(canvas, {
+  comparePriceChart = new Chart(canvas, {
     type: "line",
     data: { labels, datasets },
     options: {
@@ -1477,7 +2376,48 @@ function renderCompareChart(tickers) {
       maintainAspectRatio: false,
       plugins: { legend: { position: "top", labels: { color: "#e8edf7", font: { family: "IBM Plex Mono", size: 10 } } } },
       scales: {
-        x: { ticks: { color: "#8295b8", font: { family: "IBM Plex Mono", size: 10 }, maxRotation: 0, autoSkip: true }, grid: { display: false } },
+        x: { ticks: { color: "#8295b8", font: { family: "IBM Plex Mono", size: 9 }, maxTicksLimit: 8 }, grid: { display: false } },
+        y: { ticks: { color: "#8295b8", font: { family: "IBM Plex Mono", size: 10 }, callback: (v) => v + "%" }, grid: { color: "rgba(255,255,255,0.04)" } },
+      },
+    },
+  });
+
+  const missing = tickers.filter((t) => !usable.some((s) => s.ticker === t));
+  if (note) note.textContent = `% change from the start of the selected window, via Twelve Data daily closes.${missing.length ? ` No data for: ${missing.join(", ")}.` : ""}`;
+}
+
+function renderCompareChart(tickers) {
+  const canvas = document.getElementById("compareChart");
+  if (!canvas) return;
+  const palette = ["#d4af6a", "#6ea8fe", "#3ddc97", "#ff6b6b", "#b48ef0", "#5fd0d0", "#f0c75f"];
+
+  const datasets = tickers.map((t, i) => {
+    const m = metricsData[t];
+    const data = FUNDAMENTALS_PCT_FIELDS.map((f) => (m && m.ok && m.fieldsFound && m.fieldsFound[f.key]) ? m.values[f.key] : null);
+    return {
+      label: t,
+      data,
+      backgroundColor: palette[i % palette.length],
+      borderRadius: 4,
+    };
+  });
+
+  const anyData = datasets.some((d) => d.data.some((v) => v !== null));
+  if (!anyData) {
+    if (detailCompareChart) { detailCompareChart.destroy(); detailCompareChart = null; }
+    return;
+  }
+
+  if (detailCompareChart) detailCompareChart.destroy();
+  detailCompareChart = new Chart(canvas, {
+    type: "bar",
+    data: { labels: FUNDAMENTALS_PCT_FIELDS.map((f) => f.label), datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { position: "top", labels: { color: "#e8edf7", font: { family: "IBM Plex Mono", size: 10 } } } },
+      scales: {
+        x: { ticks: { color: "#8295b8", font: { family: "IBM Plex Mono", size: 10 } }, grid: { display: false } },
         y: { ticks: { color: "#8295b8", font: { family: "IBM Plex Mono", size: 10 }, callback: (v) => v + "%" }, grid: { color: "rgba(255,255,255,0.04)" } },
       },
     },
@@ -1485,6 +2425,8 @@ function renderCompareChart(tickers) {
 }
 
 refreshDashboard();
+updateMarketStatus();
+setInterval(updateMarketStatus, 60000);
 // Show the disclaimer once on initial load too, since Overview is the
 // default active tab when the page first opens.
 openDisclaimerModal();
