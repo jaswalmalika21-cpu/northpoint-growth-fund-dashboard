@@ -54,6 +54,10 @@ async function fetchOneQuote(ticker, apiKey) {
     d: data.d, // change
     dp: data.dp, // percent change
     pc: data.pc, // previous close
+    h: data.h, // today's high
+    l: data.l, // today's low
+    o: data.o, // today's open
+    t: data.t, // quote timestamp (unix seconds)
   };
 }
 
