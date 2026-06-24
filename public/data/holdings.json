@@ -1,0 +1,18 @@
+{
+  "fund": {
+    "name": "Northpoint Growth Fund",
+    "totalCapital": 1000000
+  },
+  "cash": 51804.28,
+  "costBasisNote": "Cost basis is provisional: it was set to the live price on 2026-06-23 (the date this portfolio was sized) because the originally specified cost-basis date, June 26, 2026, had not occurred yet. These costBasis values will be updated to the actual June 26, 2026 market close once that date has passed.",
+  "costBasisAsOf": "2026-06-23T20:00:00Z",
+  "holdings": [
+    { "ticker": "MSFT", "company": "Microsoft Corporation", "sector": "Technology", "shares": 508, "costBasis": 373.94 },
+    { "ticker": "V", "company": "Visa Inc.", "sector": "Financial Services", "shares": 517, "costBasis": 328.48 },
+    { "ticker": "JPM", "company": "JPMorgan Chase & Co.", "sector": "Financial Services", "shares": 418, "costBasis": 334.14 },
+    { "ticker": "COST", "company": "Costco Wholesale Corporation", "sector": "Consumer Defensive", "shares": 135, "costBasis": 957.68 },
+    { "ticker": "ADBE", "company": "Adobe Inc.", "sector": "Technology", "shares": 607, "costBasis": 197.43 },
+    { "ticker": "GOOGL", "company": "Alphabet Inc.", "sector": "Communication Services", "shares": 375, "costBasis": 346.13 },
+    { "ticker": "NVDA", "company": "NVIDIA Corporation", "sector": "Technology", "shares": 349, "costBasis": 200.04 }
+  ]
+}

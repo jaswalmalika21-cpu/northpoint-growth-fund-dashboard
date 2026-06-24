@@ -1,0 +1,9 @@
+{
+  "name": "northpoint-growth-fund-dashboard",
+  "version": "1.0.0",
+  "description": "Live investment dashboard for the Northpoint Growth Fund (AFM 241 Assignment 2). Static frontend + a Netlify serverless function that proxies Finnhub quotes server-side.",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  }
+}
